@@ -111,7 +111,7 @@
                         <span id="kurang" class="rounded">
                             <i class="bi bi-dash-circle"></i>
                         </span>
-                        <input type="text" id="jml_tiket" autocomplete="off" name="jml_tiket" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly">
+                        <input type="text" id="jml_tiket" autocomplete="off" name="jml_tiket" style="width: 50px; text-align: center;" class="mx-3" value="1" readonly="readonly">
                         <span id="tambah" class="rounded">
                             <i class="bi bi-plus-circle"></i>
                         </span>
