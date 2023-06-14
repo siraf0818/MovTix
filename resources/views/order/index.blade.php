@@ -405,8 +405,8 @@
             var time = $("#time").find('option:selected').text()
 
             if (time == "12:30") {
-                price.text("35.000")
-                $('input[name=price]').val("35.000");
+                price.text("1.000")
+                $('input[name=price]').val("1.000");
             }
 
             value++
