@@ -303,36 +303,36 @@
             var value = parseInt(jml_tiket.val())
             switch (text) {
                 case "12:30":
-                    price.text("35.000")
-                    $('input[name=price]').val("35.000");
+                    price.text("1.000")
+                    $('input[name=price]').val("1.000");
                     break;
                 case "13:00":
-                    price.text("35.000")
-                    $('input[name=price]').val("35.000");
+                    price.text("1.000")
+                    $('input[name=price]').val("1.000");
                     break;
                 case "15:40":
-                    price.text("35.000")
-                    $('input[name=price]').val("35.000");
+                    price.text("1.000")
+                    $('input[name=price]').val("1.000");
                     break;
                 case "16:10":
-                    price.text("40.000")
-                    $('input[name=price]').val("40.000");
+                    price.text("1.000")
+                    $('input[name=price]').val("1.000");
                     break;
                 case "16:40":
-                    price.text("40.000")
-                    $('input[name=price]').val("40.000");
+                    price.text("1.000")
+                    $('input[name=price]').val("1.000");
                     break;
                 case "19:10":
-                    price.text("45.000")
-                    $('input[name=price]').val("45.000");
+                    price.text("1.000")
+                    $('input[name=price]').val("1.000");
                     break;
                 case "20:20":
-                    price.text("45.000")
-                    $('input[name=price]').val("45.000");
+                    price.text("1.000")
+                    $('input[name=price]').val("1.000");
                     break;
                 default:
-                    price.text("35.000");
-                    $('input[name=price]').val("35.000");
+                    price.text("1.000");
+                    $('input[name=price]').val("1.000");
             }
 
             var textPrice = price.text().split('.').join('');

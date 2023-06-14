@@ -77,7 +77,7 @@
             </div>
             <div class="custom-control custom-checkbox mb-3">
               <input type="checkbox" name="remember" class="custom-control-input" id="remember">
-              <label class="custom-control-label" for="remember">Remember Me</label>
+              <label class="custom-control-label" for="remember">Remember Me's</label>
             </div>
             <button type="submit" class="btn btn-primary w-100" name="submit">Login</button>
             <hr>
