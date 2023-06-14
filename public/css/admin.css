@@ -13,6 +13,10 @@
     --grey: #f5f5f5;
     --black1: #222;
     --black2: #999;
+    --blue1: #336699;
+    --blue2: #204060;
+    --coral: #ffbb99;
+    --dark: #4d1a00;
 }
 
 body {
@@ -29,14 +33,15 @@ body {
     position: fixed;
     width: 300px;
     height: 100%;
-    background: var(--blue);
-    border-left: 10px solid var(--blue);
+    background: var(--dark);
+    border-left: 10px solid var(--dark);
     transition: 0.5s;
     overflow: hidden;
 }
 
 .navigation.active {
     width: 80px;
+    background-color: var(--dark);
 }
 
 .navigation ul {
