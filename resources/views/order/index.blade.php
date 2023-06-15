@@ -6,6 +6,7 @@
         <div class="col-lg-8">
             <form action="/pay" method="POST" id="form-bayar">
                 @csrf
+                <h4>Movie</h4>
                 <div class="input-group mb-3">
                     <label for="cities" class="input-group-prepend">
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-geo-alt"></i></span>
@@ -23,7 +24,6 @@
                     </label>
                     <select id="type" name="type" class="form-select" aria-label="Default select example">
                         <option selected>Pilih Type</option>
-
                     </select>
                 </div>
                 <div class="input-group mb-3">
@@ -34,12 +34,11 @@
                         <option selected>Pilih Theaters</option>
                     </select>
                 </div>
-                <hr>
                 <div class="input-group mb-3 position-relative" style="z-index: 100">
                     <label for="movie" class="input-group-prepend">
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-film"></i></span>
                     </label>
-                    <input type="search" id="movie" class="form-control" hint="off" autocomplete="off" name="movie" placeholder="Cari film.." required />
+                    <input type="search" id="movie" class="form-control" hint="off" autocomplete="off" name="movie" placeholder="Cari film..." required />
                     <div class="dropdown mt-2 invisible w-100">
                         <ul id="list-movie" class="p-2 w-100 bg-white rounded text-black list-unstyled position-absolute">
                         </ul>
@@ -88,7 +87,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="col-lg-3 mt-2 col-6">
                         <div class="row">
                             <div class="col-2">
@@ -99,6 +97,20 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <hr>
+                <h4>Makanan & Minuman</h4>
+                <div class="input-group mb-3">
+                    <label for="addon" class="input-group-prepend">
+                        <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span>
+                    </label>
+                    <select id="addon" name="addon" class="form-select" aria-label="Default select example">
+                        <option selected>Pilih Paket</option>
+                        <option>Serbu 1 (Popcorn Salt Kidz + Softdrink-S)</option>
+                        <option>Serbu 2 (Popcorn Salt Kidz + Java Tea-S)</option>
+                        <option>Combo 1 (Popcorn Salt-S + Softdrink-S)</option>
+                        <option>Combo 2 (Popcorn Salt-S + Java Tea-S)</option>
+                    </select>
                 </div>
                 <input id="date" name="date" type="hidden" value="" required>
                 <input id="price" name="price" type="hidden" value="" required>
@@ -111,7 +123,7 @@
                         <span id="kurang" class="rounded">
                             <i class="bi bi-dash-circle"></i>
                         </span>
-                        <input type="text" id="jml_tiket" autocomplete="off" name="jml_tiket" style="width: 50px; text-align: center;" class="mx-3" value="1" readonly="readonly">
+                        <input type="text" id="jml_tiket" autocomplete="off" name="jml_tiket" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly">
                         <span id="tambah" class="rounded">
                             <i class="bi bi-plus-circle"></i>
                         </span>
@@ -295,58 +307,6 @@
             })
         });
 
-        $('#time').change(function() {
-            var option = $(this).find('option:selected');
-            var text = option.text();
-            var price = $("#price p");
-            var jml_tiket = $('#jml_tiket');
-            var value = parseInt(jml_tiket.val())
-            switch (text) {
-                case "12:30":
-                    price.text("1.000")
-                    $('input[name=price]').val("1.000");
-                    break;
-                case "13:00":
-                    price.text("1.000")
-                    $('input[name=price]').val("1.000");
-                    break;
-                case "15:40":
-                    price.text("1.000")
-                    $('input[name=price]').val("1.000");
-                    break;
-                case "16:10":
-                    price.text("1.000")
-                    $('input[name=price]').val("1.000");
-                    break;
-                case "16:40":
-                    price.text("1.000")
-                    $('input[name=price]').val("1.000");
-                    break;
-                case "19:10":
-                    price.text("1.000")
-                    $('input[name=price]').val("1.000");
-                    break;
-                case "20:20":
-                    price.text("1.000")
-                    $('input[name=price]').val("1.000");
-                    break;
-                default:
-                    price.text("1.000");
-                    $('input[name=price]').val("1.000");
-            }
-
-            var textPrice = price.text().split('.').join('');
-            var priceTotal = parseFloat(textPrice) * value;
-
-            $(".price-t").text(numberWithCommas(priceTotal))
-            var ppn = (priceTotal / 100) * 11;
-            $('.ppn').text(numberWithCommas(ppn))
-
-            var totalBayar = priceTotal + ppn;
-            $('.price-total').text(numberWithCommas(totalBayar))
-            $('input[name=total_price]').val(totalBayar)
-        });
-
         $("#movie").bind("keypress click", function() {
             var value = $(this).val().toLowerCase();
             $('#list-movie li').filter(function() {
@@ -371,6 +331,58 @@
         $("#time span").on('click', function() {
             $('.dropdwn-time').toggleClass("invisible");
         })
+
+        $('#time').change(function() {
+            var option = $(this).find('option:selected');
+            var text = option.text();
+            var price = $("#price p");
+            var jml_tiket = $('#jml_tiket');
+            var value = parseInt(jml_tiket.val())
+            switch (text) {
+                case "12:30":
+                    price.text("1.000")
+                    $('input[name=price]').val("1.000");
+                    break;
+                case "13:00":
+                    price.text("2.000")
+                    $('input[name=price]').val("2.000");
+                    break;
+                case "15:40":
+                    price.text("3.000")
+                    $('input[name=price]').val("3.000");
+                    break;
+                case "16:10":
+                    price.text("4.000")
+                    $('input[name=price]').val("4.000");
+                    break;
+                case "16:40":
+                    price.text("5.000")
+                    $('input[name=price]').val("5.000");
+                    break;
+                case "19:10":
+                    price.text("6.000")
+                    $('input[name=price]').val("6.000");
+                    break;
+                case "20:20":
+                    price.text("6.000")
+                    $('input[name=price]').val("7.000");
+                    break;
+                default:
+                    price.text("8.000");
+                    $('input[name=price]').val("8.000");
+            }
+
+            var textPrice = price.text().split('.').join('');
+            var priceTotal = parseFloat(textPrice) * value;
+
+            $(".price-t").text(numberWithCommas(priceTotal))
+            var ppn = (priceTotal / 100) * 11;
+            $('.ppn').text(numberWithCommas(ppn))
+
+            var totalBayar = priceTotal + ppn;
+            $('.price-total').text(numberWithCommas(totalBayar))
+            $('input[name=total_price]').val(totalBayar)
+        });
 
         $("#kurang").on('click', function() {
             var jml_tiket = $('#jml_tiket');
