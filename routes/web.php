@@ -76,8 +76,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::resource('/dashboard/member/orders', MemberOrders::class);
     Route::resource('/dashboard/member/tiket', MemberTiketController::class);
-    Route::get('/dashboard/orders/pdf/{id}', [AdminOrderController::class, 'pdf'])->name('pdf');
-    Route::get('/dashboard/orders/downloadpdf/{id}', [AdminOrderController::class, 'downloadPDF'])->name('down.pdf');
     Route::resource('/dashboard/member/setting', SettingController::class);
     Route::resource('/dashboard/setting', SettingController::class);
     Route::resource('/dashboard/member/password', PasswordController::class);

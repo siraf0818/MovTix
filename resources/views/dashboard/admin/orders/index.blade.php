@@ -14,7 +14,7 @@
             <h5>Recent Orders</h5>
             <div class="search" style="width: 200px; height: 40px; padding-bottom: 8px;">
                 <label for="" style="height: 100%;">
-                    <input style="height: 100%" id="search" type="text" placeholder="Search..">
+                    <input style="height: 100%" id="searchval" type="text" placeholder="Search..">
                     <ion-icon style="height: 100%" name="search-outline"></ion-icon>
                 </label>
             </div>
