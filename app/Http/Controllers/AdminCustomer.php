@@ -61,13 +61,6 @@ class AdminCustomer extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Dashboard  $dashboard
-     * @return \Illuminate\Http\Response
-     */
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
