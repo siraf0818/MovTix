@@ -54,7 +54,6 @@
                             </td>
                             <td>
                                 <p class="fw-normal mb-1">{{$detail->movie}}</p>
-                                <p class="text-muted mb-0">{{$detail->theater}}</p>
                             </td>
                             <td>
                                 <p class="fw-normal mb-1">{{$detail->date}}</p>

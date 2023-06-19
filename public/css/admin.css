@@ -1,10 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Ubuntu', sans-serif;
+    font-family: "Ubuntu", sans-serif;
 }
 
 :root {
@@ -64,7 +64,7 @@ body {
 .navigation ul li.hovered {
     background: var(--white);
 }
-.navigation ul li:nth-child(1){
+.navigation ul li:nth-child(1) {
     margin-bottom: 40px;
     pointer-events: none;
 }
@@ -76,7 +76,6 @@ body {
     display: flex;
     text-decoration: none;
     color: var(--white);
-    
 }
 
 .navigation ul li:hover a,
@@ -110,9 +109,9 @@ body {
 
 /* curve outside */
 
-.navigation ul li:hover a::before, 
+.navigation ul li:hover a::before,
 .navigation ul li.hovered a::before {
-    content: '';
+    content: "";
     position: absolute;
     right: 0;
     top: -80%;
@@ -126,7 +125,7 @@ body {
 
 .navigation ul li:hover a::after,
 .navigation ul li.hovered a::after {
-    content: '';
+    content: "";
     position: absolute;
     right: 0;
     bottom: -80%;
@@ -145,7 +144,6 @@ body {
     min-height: 100vh;
     background: var(--white);
     transition: 0.5s;
-
 }
 .main.active {
     width: calc(100% - 80px);
@@ -170,7 +168,6 @@ body {
     font-size: 2.5rem;
     cursor: pointer;
 }
-
 
 .search {
     position: relative;
@@ -201,7 +198,8 @@ body {
     left: 10px;
     font-size: 1.2rem;
 }
-.list-nav, .list-nav ul {
+.list-nav,
+.list-nav ul {
     transition: 0.5s;
 }
 .list-nav ul {
@@ -218,9 +216,9 @@ body {
     display: flex;
     text-decoration: none;
     color: var(--black2);
-    
 }
-.list-nav ul li:hover, .list-nav ul li:hover a {
+.list-nav ul li:hover,
+.list-nav ul li:hover a {
     background-color: var(--blue);
     color: white;
 }
@@ -267,9 +265,9 @@ body {
 }
 .user .img img {
     position: absolute;
-    top:53%; 
-    left:50%; 
-    transform:translate(-50%, -50%); 
+    top: 53%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     border-radius: 50%;
     width: 100%;
     height: 100%;
@@ -306,12 +304,15 @@ body {
 }
 
 .card-statistic .col-6 .row:hover .name-stats,
-.card-statistic .col-6 .row:hover .number-stats ,
+.card-statistic .col-6 .row:hover .number-stats,
 .card-statistic .col-6 .row:hover .icon-stats ion-icon {
     color: white;
 }
 
-.details .recentOrders, .recentCustomer, .customer-details, .movie-detail {
+.details .recentOrders,
+.recentCustomer,
+.customer-details,
+.movie-detail {
     border-radius: 20px;
     box-shadow: rgba(170, 176, 181, 0.2) 0px 8px 24px;
 }
@@ -323,7 +324,7 @@ body {
     border-radius: 20px;
 }
 .purple-gradient {
-    background: linear-gradient(40deg,#ff6ec4,#7873f5) !important;
+    background: linear-gradient(40deg, #ff6ec4, #7873f5) !important;
 }
 .customer-details .address {
     font-size: 15px;
@@ -340,11 +341,13 @@ body {
     color: var(--grey);
 }
 
-.table-order table, .table-customer table {
+.table-order table,
+.table-customer table {
     color: var(--black2);
 }
 
-.details .recentOrders table tbody tr:hover, .details .table-customer table tbody tr:hover {
+.details .recentOrders table tbody tr:hover,
+.details .table-customer table tbody tr:hover {
     background: rgb(221, 216, 255);
     color: #4b1b1b;
 }
@@ -361,12 +364,12 @@ a.badge-edit:hover {
     font-size: 14px;
     font-weight: 520;
     border-radius: 20px;
-    min-height: calc(100% - 60px);
-    background: linear-gradient(40deg, var(--blue),#2E3CB0) !important;
+    min-height: calc(90% - 60px);
+    background: linear-gradient(40deg, var(--blue), #2e3cb0) !important;
 }
 
 /* // Small devices (landscape phones, 576px and up) */
-@media (max-width: 576px) { 
+@media (max-width: 576px) {
     body {
         overflow-x: hidden !important;
     }
@@ -383,20 +386,24 @@ a.badge-edit:hover {
     .main {
         width: 100%;
     }
-    
+
     .number-stats {
         font-size: 22px;
     }
 }
-  
+
 /* // Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) { }
+@media (min-width: 768px) {
+}
 
 /* // Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {  }
+@media (min-width: 992px) {
+}
 
 /* // X-Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) { }
+@media (min-width: 1200px) {
+}
 
 /* // XX-Large devices (larger desktops, 1400px and up) */
-@media (min-width: 1400px) { }
+@media (min-width: 1400px) {
+}

@@ -20,23 +20,15 @@
                         </p>
                     </div>
                     <div class="col-6 mt-4">
-                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Theater</p>
-                        <p class="date-tiket m-0">{{$tiket->theater}}</p>
-                    </div>
-                    <div class="col-6 mt-4">
                         <p class="title-date m-0" style="color: rgb(209, 204, 204)">Order</p>
                         <p class="date-tiket m-0">{{$tiket->order_id}}</p>
                     </div>
                     <div class="col-6 mt-4">
-                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">City</p>
-                        <p class="date-tiket m-0">{{$tiket->city}}</p>
-                    </div>
-                    <div class="col-6 mt-4">
-                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Type</p>
-                        <p class="date-tiket m-0">{{$tiket->type}}</p>
+                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Addon</p>
+                        <p class="date-tiket m-0">-</p>
                     </div>
                 </div>
-                <hr class="mt-4" style="border: 3px dashed white">
+                <hr class="mt-5" style="border: 3px dashed white">
                 <div class="d-flex justify-content-center">
                     {!! QrCode::size(230)->generate('VIPCostumer') !!}
                 </div>

@@ -25,9 +25,7 @@
                     <tr>
                         <th>Movie</th>
                         <th>Price</th>
-                        <th>Theater</th>
                         <th>Seat</th>
-                        <th>City</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -47,16 +45,10 @@
                             <p class="text-muted mb-0">{{$t->total_price}}</p>
                         </td>
                         <td>
-                            <p class="text-muted mb-0">{{$t->theater}}</p>
-                        </td>
-                        <td>
                             @foreach (App\Models\Seat::where('order_id', '=', $t->order_id)->get() as $seat)
 
                             <span class="text-muted mb-0">{{ $seat->no_seat }}</span>
                             @endforeach
-                        </td>
-                        <td>
-                            <p class="text-muted mb-0">{{$t->city}}</p>
                         </td>
                         <td>
                             <div class="row w-100">
