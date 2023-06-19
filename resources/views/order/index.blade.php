@@ -172,6 +172,19 @@
                         <p>00.00</p>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-9">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="addon" value="" id="addon" checked>
+                            <label class="form-check-label" style="font-size: 0.9rem" for="addon">
+                                <span class="label-addon">Addon</span> | <span class="jml-addon">0</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col price-a">
+                        <p>00.00</p>
+                    </div>
+                </div>
                 <hr class="my-1">
                 <div class="row">
                     <p style="color: rgb(228, 220, 220)">Pajak dan Biaya Tambahan</p>
@@ -370,6 +383,46 @@
                 default:
                     price.text("8.000");
                     $('input[name=price]').val("8.000");
+            }
+
+            var textPrice = price.text().split('.').join('');
+            var priceTotal = parseFloat(textPrice) * value;
+
+            $(".price-t").text(numberWithCommas(priceTotal))
+            var ppn = (priceTotal / 100) * 11;
+            $('.ppn').text(numberWithCommas(ppn))
+
+            var totalBayar = priceTotal + ppn;
+            $('.price-total').text(numberWithCommas(totalBayar))
+            $('input[name=total_price]').val(totalBayar)
+        });
+
+        $('#addon').change(function() {
+            var option = $(this).find('option:selected');
+            var text = option.text();
+            var price = $("#price p");
+            var jml_tiket = $('#jml_tiket');
+            var value = parseInt(jml_tiket.val())
+            switch (text) {
+                case "Serbu 1 (Popcorn Salt Kidz + Softdrink-S)":
+                    price.text("1.000")
+                    $('input[name=price]').val("1.000");
+                    break;
+                case "Serbu 2 (Popcorn Salt Kidz + Java Tea-S)":
+                    price.text("2.000")
+                    $('input[name=price]').val("2.000");
+                    break;
+                case "Combo 1 (Popcorn Salt-S + Softdrink-S)":
+                    price.text("3.000")
+                    $('input[name=price]').val("3.000");
+                    break;
+                case "Combo 2 (Popcorn Salt-S + Java Tea-S)":
+                    price.text("4.000")
+                    $('input[name=price]').val("4.000");
+                    break;
+                default:
+                    price.text("0.000");
+                    $('input[name=price]').val("0.000");
             }
 
             var textPrice = price.text().split('.').join('');
