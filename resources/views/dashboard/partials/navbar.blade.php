@@ -3,7 +3,7 @@
         <li>
             <a href="">
                 <span class="icon">
-                    <img src="/img/logo.jpg" alt="" style="width: 40px; height: 40px;" class="rounded-circle">
+                    <img src="/img/logo.png" alt="" style="width: 40px; height: 40px;" class="rounded-circle">
                 </span>
                 <span class="title mt-1">MovTix</span>
             </a>

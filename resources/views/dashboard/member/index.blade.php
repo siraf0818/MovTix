@@ -65,7 +65,6 @@
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{$order->movie}}</p>
-                            <p class="text-muted mb-0">{{$order->theater}}</p>
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{number_format($order->total_price, 0, '.', '.');}}</p>

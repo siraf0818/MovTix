@@ -20,7 +20,6 @@
             </div>
             <p class="text-muted mb-0 col mt-2">Jl. Gegerkalong Tengah No.6F, Gegerkalong, Kec. Sukasari, Kota Bandung, Jawa Barat 40153</p>
         </div>
-
         <div class="d-flex row invoice mt-3 justify-content-between purple-gradient color-block z-depth-1">
             <div class="col-lg-4 col-12 p-3">
                 <p class="fw-bolder mb-0">Invoice Number</p>
@@ -55,7 +54,6 @@
                             </td>
                             <td>
                                 <p class="fw-normal mb-1">{{$detail->movie}}</p>
-                                <p class="text-muted mb-0">{{$detail->theater}}</p>
                             </td>
                             <td>
                                 <p class="fw-normal mb-1">{{$detail->date}}</p>
@@ -101,47 +99,6 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-
-    </div>
-
-    <div class="col" style="min-height: calc(100vh - 60px);">
-        <div class="row gap-3">
-            <div class="col-12 customer-details p-3">
-                <p class="title">Customer Details</p>
-                <div class="d-flex align-items-center">
-                    <img src="/{{$detail->user->image}}" alt="" style="width: 45px; height: 45px;" class="rounded-circle">
-                    <div class="ms-3">
-                        <p class="fw-bold mb-0">{{$detail->user->name}}</p>
-                        <p class="text-muted mb-0">{{$detail->user->email}}</p>
-                    </div>
-                </div>
-                <hr>
-                <p class="address text-muted">{{$detail->user->address}}</p>
-                <div class="view d-flex justify-content-center">
-                    <a href="/dashboard/customers/{{$detail->user->id}}/edit" class="text-decoration-none w-100">
-                        <button class="btn btn-info w-100 py-2" style="color: #ffffff;">View Customer</button>
-                    </a>
-                </div>
-            </div>
-            <div class="col-12 customer-details p-3">
-                <p class="title">Amount <span class="text-muted">(IDR)</span></p>
-                <h4 class="price mb-4">RP. {{number_format($detail->total_price, 0, '.', '.');}}</h4>
-                <span class="py-2 px-3 my-1" style="background: #ffdfe0; color: #be7a7c; border-radius: 20px;">Due on {{date('d M, Y', strtotime("+1 day", strtotime($detail->updated_at)));}}</span>
-                <hr style="color: rgb(179, 176, 176)">
-                <div class="row">
-                    <div class="col">
-                        <a href="{{route('pdf', $detail->order_id)}}" class="text-decoration-none">
-                            <p class="py-2 px-3 my-1 btn-info btn text-center w-100" style="color: white; border-radius: 20px; cursor: pointer;">Preview</p>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <a href="{{route('down.pdf', $detail->order_id)}}" class="text-decoration-none">
-                            <p class="py-2 px-3 my-1 btn-info btn text-center w-100" style="color: white; border-radius: 20px; cursor: pointer;">Download</p>
-                        </a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

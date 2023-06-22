@@ -16,9 +16,11 @@ class OrderController extends Controller
     //
     public function index()
     {
+        $posts = Movie::getMovie();
         return view('order.index', [
             'title' => 'Pembayaran',
             'active' => 'order',
+            'posts' => $posts,
             "cities" => Movie::getCities(),
         ]);
     }
