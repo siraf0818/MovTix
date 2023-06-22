@@ -90,7 +90,7 @@
               </button>
             </div>
 
-					<div class="text-center p-t-90">
+					<div class="text-center p-t-30">
             <p class="text-center text-white" style="font-size: 12px;">Belum memiliki akun? 
               <a href="/register" style="text-decoration: none; font-weight: bold;">REGISTER</a>
             </p>

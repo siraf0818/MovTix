@@ -80,7 +80,7 @@ body {
 
 .navigation ul li:hover a,
 .navigation ul li.hovered a {
-    color: var(--blue);
+    color: var(--dark);
 }
 
 .navigation ul li a .icon {
