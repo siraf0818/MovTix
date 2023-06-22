@@ -1,13 +1,24 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark ">
   <div class="container">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="/">
       <h3>MovTix</h3>
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="lg-collap collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link {{ ($active === "home") ? 'active' :  ''}}" aria-current="page" href="{{route('home')}}">Home</a>
@@ -19,10 +30,12 @@
         </li>
       </ul>
       </ul>
+
       <form action="/search" class="d-flex" method="get">
-        <input id="searchnav" class="keyword form-control me-2" type="text" placeholder="search movie" name="keyword" aria-label="Search" size="20" autocomplete="off">
+        <input id="searchnav" class="keyword form-control me-2" type="text" placeholder="search movie" name="keyword" aria-label="Search" size="30" autocomplete="off">
         <button class="tombol-cari btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
       </form>
+      
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-lg-50">
         @auth
         <li class="nav-item dropdown">
@@ -48,6 +61,7 @@
         </li>
         @endauth
       </ul>
+
     </div>
   </div>
 </nav>
