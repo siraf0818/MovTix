@@ -74,8 +74,8 @@
                             @endif
 
                             @else
-                            <span class="badge bg-info rounded-pill d-inline">
-                                inProgres
+                            <span class="badge bg-blue rounded-pill d-inline">
+                                InProgres
                             </span>
                             @endif
                         </td>
@@ -88,15 +88,15 @@
                                     <form action="/dashboard/orders/{{{$order->order_id}}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
-                                            delete
-                                        </button>
+                                        <a type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
+                                            Delete
+                                        </a>
                                     </form>
 
                                 </div>
                                 <div class="col-lg-6">
-                                    <a href="/dashboard/orders/{{{$order->order_id}}}/" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
-                                        view
+                                    <a href="/dashboard/orders/{{{$order->order_id}}}/" class="badge badge-edit text-white bg-grey rounded-pill d-inline">
+                                        View
                                     </a>
                                 </div>
                             </div>

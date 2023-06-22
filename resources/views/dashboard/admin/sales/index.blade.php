@@ -65,13 +65,13 @@
                             <div class="row w-100">
                                 <div class="col-lg-6">
                                     <a href="/dashboard/tiket/{{$sale->order_id}}" class="badge badge-edit text-white bg-warning rounded-pill d-inline">
-                                        tiket
+                                        Tiket
                                     </a>
 
                                 </div>
                                 <div class="col-lg-6">
-                                    <a href="/dashboard/sales/{{{$sale->order_id}}}/" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
-                                        view
+                                    <a href="/dashboard/sales/{{{$sale->order_id}}}/" class="badge badge-edit text-white bg-grey rounded-pill d-inline">
+                                        View
                                     </a>
                                 </div>
                             </div>

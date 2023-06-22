@@ -57,9 +57,9 @@
                                     <form action="/dashboard/customers/{{{$user->id}}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" onclick="return confirm('Are you sure?')" class="badge badge-delete text-white bg-danger rounded-pill d-inline">
-                                            delete
-                                        </button>
+                                        <a type="submit" onclick="return confirm('Are you sure want to delete user?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
+                                            Delete
+                                        </a>
                                     </form>
 
                                 </div>
