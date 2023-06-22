@@ -358,7 +358,7 @@ body {
 
 .details .recentOrders table tbody tr:hover,
 .details .table-customer table tbody tr:hover {
-    background: rgb(221, 216, 255);
+    background: rgb(230, 230, 255);
     color: #4b1b1b;
 }
 

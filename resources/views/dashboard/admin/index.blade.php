@@ -10,7 +10,7 @@
                         <div class="name-stats">Orders</div>
                     </div>
                     <div class="col-4 icon-stats">
-                        <ion-icon name="chatbubble-outline"></ion-icon>
+                        <ion-icon name="bag-check-outline"></ion-icon>
                     </div>
                 </div>
             </a>
