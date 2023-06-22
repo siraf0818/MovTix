@@ -10,7 +10,7 @@
                         <div class="name-stats">Orders</div>
                     </div>
                     <div class="col-4 icon-stats">
-                        <ion-icon name="bag-check-outline"></ion-icon>
+                        <ion-icon name="chatbubble-outline"></ion-icon>
                     </div>
                 </div>
             </a>
@@ -57,7 +57,7 @@
     <div class="recentOrders col-lg-8 col-md-12 p-3 rounded">
         <div class="cardHeader d-flex justify-content-between">
             <h5>Recent Orders</h5>
-            <a href="/dashboard/orders" class="badge badge-primary bg-red h-50">View All</a>
+            <a href="/dashboard/orders" class="badge badge-primary bg-primary h-50">View All</a>
         </div>
         <div class="table-order overflow-auto">
             <table class="table align-middle mb-0 bg-white">
@@ -65,6 +65,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Movie</th>
+                        <th>Addon</th>
                         <th>Price</th>
                         <th>Status</th>
                     </tr>
@@ -85,6 +86,9 @@
                             <p class="fw-normal mb-1">{{$order->movie}}</p>
                         </td>
                         <td>
+                            <p class="fw-normal mb-1">{{$order->addon}}</p>
+                        </td>
+                        <td>
                             <p class="fw-normal mb-1">{{number_format($order->total_price, 0, '.', '.');}}</p>
                         </td>
                         <td>
@@ -101,7 +105,7 @@
                             <span class="badge bg-primary rounded-pill d-inline">
                                 {{$order->payment->transaction_status}}
                             </span>
-                            @elseif($order->payment->transaction_status == "cancel")
+                            @elseif($order->payment->transaction_status == "cencel")
                             <span class="badge bg-danger rounded-pill d-inline">
                                 {{$order->payment->transaction_status}}
                             </span>
@@ -112,8 +116,8 @@
                             @endif
 
                             @else
-                            <span class="badge bg-blue rounded-pill d-inline">
-                                InProgres
+                            <span class="badge bg-info rounded-pill d-inline">
+                                inProgres
                             </span>
                             @endif
                         </td>
@@ -126,7 +130,7 @@
     <div class="recentCustomer col p-3 rounded">
         <div class="cardHeader d-flex justify-content-between">
             <h5>Recent Customer</h5>
-            <a href="/dashboard/customers" class="badge badge-primary bg-red h-50">View All</a>
+            <a href="/dashboard/customers" class="badge badge-primary bg-primary h-50">View All</a>
         </div>
         <div class="table-customer">
             <table class="table align-middle mb-0 bg-white">
