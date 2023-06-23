@@ -139,7 +139,22 @@
                     </div>
                 </div>
                 <hr>
-                <h4>Makanan & Minuman</h4>
+                <div class="row">
+                    <div class="col-lg-7 col-12">
+                        <h4>Makanan & Minuman</h4>
+                    </div>
+                    <div class="col-lg-5 col-12">
+                        <div class="col-6 col-lg-12 mb-3 tiket">
+                            <span id="kurangb" class="rounded">
+                                <i class="bi bi-dash-circle"></i>
+                            </span>
+                            <input type="text" id="banyak_addon" autocomplete="off" name="banyak_addon" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly">
+                            <span id="tambahb" class="rounded">
+                                <i class="bi bi-plus-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-lg-10 col-12">
                         <div class="input-group mb-3">
@@ -226,7 +241,6 @@
                         <p class="price-total">00.00</p>
                     </div>
                 </div>
-
             </div>
             <div class="col-12" style="display: grid">
                 <button id="btn-bayar" type="button" class="btn btn-secondary w-100 rounded mx-auto">Lanjutkan</button>
@@ -611,6 +625,27 @@
             var totalBayar = priceTotal + ppn;
             $('.price-total').text(numberWithCommas(totalBayar))
             $('input[name=total_price]').val(totalBayar)
+
+
+        });
+
+        $("#kurangb").on('click', function() {
+            var banyak_addon = $('#banyak_addon');
+            var valueb = parseInt(banyak_addon.val())
+            if (valueb > 0) {
+                valueb--
+                banyak_addon.val(valueb)
+                $(".banyak_addon").text(valueb)
+            }
+        });
+
+
+        $("#tambahb").on('click', function() {
+            var banyak_addon = $('#banyak_addon');
+            var valueb = parseInt(banyak_addon.val())
+            valueb++
+            banyak_addon.val(valueb)
+            $(".banyak_addon").text(valueb)
 
 
         });
