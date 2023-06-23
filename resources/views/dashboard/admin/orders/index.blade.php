@@ -26,6 +26,7 @@
                         <th>Name</th>
                         <th>Invoice</th>
                         <th>Movie</th>
+                        <th>Addon</th>
                         <th>Status</th>
                         <th>Price</th>
                         <th>Action</th>
@@ -48,6 +49,9 @@
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{$order->movie}}</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">{{$order->addon}}</p>
                         </td>
                         <td>
                             @if ($order->payment != null)

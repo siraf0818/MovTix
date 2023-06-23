@@ -61,6 +61,8 @@ class OrderController extends Controller
             'date' => 'required',
             'time' => 'required',
             'movie' => 'required',
+            'addon' => 'required',
+            'jml_addon' => 'required|numeric|between:1,20',
             'id_movie' => 'required',
             'jml_tiket' => 'required|numeric|between:1,20',
         ]);

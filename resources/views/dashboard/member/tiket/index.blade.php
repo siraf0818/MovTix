@@ -24,6 +24,7 @@
                 <thead class="bg-light">
                     <tr>
                         <th>Movie</th>
+                        <th>Addon</th>
                         <th>Price</th>
                         <th>Seat</th>
                         <th>Action</th>
@@ -40,6 +41,9 @@
                                     <p class="text-muted mb-0">{{$t->type}}</p>
                                 </div>
                             </div>
+                        </td>
+                        <td>
+                            <p class="text-muted mb-0">{{$t->addon}}</p>
                         </td>
                         <td>
                             <p class="text-muted mb-0">{{$t->total_price}}</p>

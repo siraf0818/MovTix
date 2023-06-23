@@ -16,12 +16,22 @@
     --blue1: #336699;
     --blue2: #204060;
     --coral: #ffbb99;
-    --dark: #4d1a00;
+    --dark: #26004d;
+    --grey: #52527a;
+    --blue3: #0052cc;
 }
 
 body {
     min-height: 100vh;
     overflow-x: hidden;
+}
+
+.bg-grey {
+    background: var(--grey);
+}
+
+.bg-blue {
+    background: var(--blue3);
 }
 
 .container-admin {
@@ -219,7 +229,7 @@ body {
 }
 .list-nav ul li:hover,
 .list-nav ul li:hover a {
-    background-color: var(--blue);
+    background-color: var(--dark);
     color: white;
 }
 
@@ -286,7 +296,7 @@ body {
 }
 .number-stats {
     margin-bottom: 2px;
-    color: var(--blue);
+    color: var(--dark);
 }
 
 .card-statistic .col-6 .row {
@@ -300,7 +310,7 @@ body {
 }
 
 .card-statistic .col-6 .row:hover {
-    background-color: var(--blue);
+    background-color: var(--dark);
 }
 
 .card-statistic .col-6 .row:hover .name-stats,
@@ -330,14 +340,14 @@ body {
     font-size: 15px;
 }
 .cardHeader h5 {
-    color: var(--blue);
+    color: var(--dark);
 }
 .badge {
     text-decoration: none;
     line-height: 100%;
 }
 .cardHeader .badge:hover {
-    background-color: var(--blue) !important;
+    background-color: var(--dark) !important;
     color: var(--grey);
 }
 
@@ -348,15 +358,15 @@ body {
 
 .details .recentOrders table tbody tr:hover,
 .details .table-customer table tbody tr:hover {
-    background: rgb(221, 216, 255);
+    background: rgb(230, 230, 255);
     color: #4b1b1b;
 }
 
 a.badge-delete:hover {
-    background: rgb(244, 87, 87) !important;
+    background: rgb(77,26,0) !important;
 }
 a.badge-edit:hover {
-    background: rgb(178, 178, 0) !important;
+    background: rgb(77,26,0) !important;
 }
 .detail-tiket {
     width: 100%;
@@ -365,7 +375,7 @@ a.badge-edit:hover {
     font-weight: 520;
     border-radius: 20px;
     min-height: calc(90% - 60px);
-    background: linear-gradient(40deg, var(--blue), #2e3cb0) !important;
+    background: linear-gradient(40deg, var(--dark), #2e3cb0) !important;
 }
 
 /* // Small devices (landscape phones, 576px and up) */

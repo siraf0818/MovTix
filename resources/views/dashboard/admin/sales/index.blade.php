@@ -26,6 +26,7 @@
                         <th>Name</th>
                         <th>Invoice</th>
                         <th>Movie</th>
+                        <th>Addon</th>
                         <th>Price</th>
                         <th>Payment Type</th>
                         <th>Status</th>
@@ -49,6 +50,9 @@
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{$sale->movie}}</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">{{$sale->addon}}</p>
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{number_format($sale->total_price, 0, '.', '.');}}</p>

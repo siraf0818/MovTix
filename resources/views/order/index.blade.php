@@ -6,43 +6,6 @@
         <div class="col-lg-8">
             <form action="/pay" method="POST" id="form-bayar">
                 @csrf
-                <h4>Makanan & Minuman</h4>
-                <div class="row">
-                    <div class="col-lg-10 col-12">
-                        <div class="input-group mb-3">
-                            <label for="addon" class="input-group-prepend">
-                                <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span>
-                            </label>
-                            <select id="addon" name="addon" class="form-select" aria-label="Default select example">
-                                <option selected>Pilih Addon</option>
-                                <option>Serbu 1 (Popcorn Salt Kidz + Softdrink-S)</option>
-                                <option>Serbu 2 (Popcorn Salt Kidz + Java Tea-S)</option>
-                                <option>Combo 1 (Popcorn Salt-S + Softdrink-S)</option>
-                                <option>Combo 2 (Popcorn Salt-S + Java Tea-S)</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col mt-2">
-                        <div class="row">
-                            <div class="col-2">
-                                <span class="rounded"><i class="bi bi-cash-coin"></i></span>
-                            </div>
-                            <div id="pricea" class="col">
-                                <p>00.00</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-6 col-lg-12 mb-3 tiket">
-                        <span id="kuranga" class="rounded">
-                            <i class="bi bi-dash-circle"></i>
-                        </span>
-                        <input type="text" id="jml_addon" autocomplete="off" name="jml_addon" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly">
-                        <span id="tambaha" class="rounded">
-                            <i class="bi bi-plus-circle"></i>
-                        </span>
-                    </div>
-                </div>
-                <hr>
                 <h4>Movie</h4>
                 <div class="input-group mb-3">
                     <label for="cities" class="input-group-prepend">
@@ -175,6 +138,58 @@
                         </div>
                     </div>
                 </div>
+                <hr>
+                <div class="row">
+                    <div class="col-lg-7 col-12">
+                        <h4>Makanan & Minuman</h4>
+                    </div>
+                    <div class="col-lg-5 col-12">
+                        <div class="col-6 col-lg-12 mb-3 tiket">
+                            <span id="kurangb" class="rounded">
+                                <i class="bi bi-dash-circle"></i>
+                            </span>
+                            <input type="text" id="banyak_addon" autocomplete="off" name="banyak_addon" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly">
+                            <span id="tambahb" class="rounded">
+                                <i class="bi bi-plus-circle"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="addonb">
+                    <div id="addonbs" class="col-lg-10 col-12">
+                        <div class="input-group mb-3">
+                            <label for="addon" class="input-group-prepend">
+                                <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span>
+                            </label>
+                            <select id="addon" name="addon" class="form-select" aria-label="Default select example">
+                                <option selected>Pilih Addon</option>
+                                <option>Serbu 1 (Popcorn Salt Kidz + Softdrink-S)</option>
+                                <option>Serbu 2 (Popcorn Salt Kidz + Java Tea-S)</option>
+                                <option>Combo 1 (Popcorn Salt-S + Softdrink-S)</option>
+                                <option>Combo 2 (Popcorn Salt-S + Java Tea-S)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col mt-2">
+                        <div class="row">
+                            <div class="col-2">
+                                <span class="rounded"><i class="bi bi-cash-coin"></i></span>
+                            </div>
+                            <div id="pricea" class="col">
+                                <p>00.00</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6 col-lg-12 mb-3 tiket">
+                        <span id="kuranga" class="rounded">
+                            <i class="bi bi-dash-circle"></i>
+                        </span>
+                        <input type="text" id="jml_addon" autocomplete="off" name="jml_addon" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly">
+                        <span id="tambaha" class="rounded">
+                            <i class="bi bi-plus-circle"></i>
+                        </span>
+                    </div>
+                </div>
                 <button id="submitform" class="btn btn-dark invisible" type="submit">submit</button>
             </form>
         </div>
@@ -226,7 +241,6 @@
                         <p class="price-total">00.00</p>
                     </div>
                 </div>
-
             </div>
             <div class="col-12" style="display: grid">
                 <button id="btn-bayar" type="button" class="btn btn-secondary w-100 rounded mx-auto">Lanjutkan</button>
@@ -613,6 +627,28 @@
             $('input[name=total_price]').val(totalBayar)
 
 
+        });
+
+        $("#kurangb").on('click', function() {
+            var banyak_addon = $('#banyak_addon');
+            var valueb = parseInt(banyak_addon.val())
+            if (valueb > 0) {
+                valueb--
+                banyak_addon.val(valueb)
+                $(".banyak_addon").text(valueb)
+                $('#addonb').remove();
+            }
+        });
+
+
+        $("#tambahb").on('click', function() {
+            var banyak_addon = $('#banyak_addon');
+            var addonbs = $('.addonbs');
+            var valueb = parseInt(banyak_addon.val())
+            valueb++
+            banyak_addon.val(valueb)
+            $(".banyak_addon").text(valueb)
+            $('#addonb').append('<div class="col-lg-10 col-12"><div class="input-group mb-3"><label for="addon" class="input-group-prepend"><span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span></label><select id="addonbs" name="addon" class="form-select" aria-label="Default select example">    <option selected>Pilih Addon</option>                <option>Serbu 1 (Popcorn Salt Kidz + Softdrink-S)</option>  <option>Serbu 2 (Popcorn Salt Kidz + Java Tea-S)</option>   <option>Combo 1 (Popcorn Salt-S + Softdrink-S)</option>    <option>Combo 2 (Popcorn Salt-S + Java Tea-S)</option>      </select></div></div><div class="col mt-2"><div class="row"> <div class="col-2"> <span class="rounded"><i class="bi bi-cash-coin"></i></span> </div> <div id="pricea" class="col"> <p>00.00</p> </div></div></div><div class="col-6 col-lg-12 mb-3 tiket"><span id="kuranga" class="rounded"> <i class="bi bi-dash-circle"></i>          </span><input type="text" id="jml_addon" autocomplete="off" name="jml_addon" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly"> <span id="tambaha" class="rounded"><i class="bi bi-plus-circle"></i> </span></div>');
         });
 
         $(".show-seat span").on('click', function() {

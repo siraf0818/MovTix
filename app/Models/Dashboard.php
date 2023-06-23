@@ -53,7 +53,7 @@ class Dashboard extends Model
             ],
             [
                 'title' => 'Orders',
-                'icon' => 'chatbubble-outline',
+                'icon' => 'bag-check-outline',
                 'link' => '/dashboard/orders'
             ],
             [

@@ -18,7 +18,7 @@
                     <p class="text-muted mb-0">movtix@gmail.com</p>
                 </div>
             </div>
-            <p class="text-muted mb-0 col mt-2">Jl. Gegerkalong Tengah No.6F, Gegerkalong, Kec. Sukasari, Kota Bandung, Jawa Barat 40153</p>
+            <p class="text-muted mb-0 col mt-2">Polines</p>
         </div>
         <div class="d-flex row invoice mt-3 justify-content-between purple-gradient color-block z-depth-1">
             <div class="col-lg-4 col-12 p-3">
@@ -42,6 +42,7 @@
                         <tr>
                             <th>Invoice</th>
                             <th>Movie</th>
+                            <th>Addon</th>
                             <th>Date Time</th>
                             <th>Price</th>
                             <th>Tickets</th>
@@ -54,6 +55,10 @@
                             </td>
                             <td>
                                 <p class="fw-normal mb-1">{{$detail->movie}}</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">{{$detail->addon}}</p>
+                                <p class="fw-normal mb-1">Jumlah: {{$detail->jml_addon}}</p>
                             </td>
                             <td>
                                 <p class="fw-normal mb-1">{{$detail->date}}</p>

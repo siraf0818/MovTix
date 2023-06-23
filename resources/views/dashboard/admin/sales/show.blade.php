@@ -41,6 +41,7 @@
                         <tr>
                             <th>Invoice</th>
                             <th>Movie</th>
+                            <th>Addon</th>
                             <th>Date Time</th>
                             <th>Price</th>
                             <th>Tickets</th>
@@ -53,6 +54,11 @@
                             </td>
                             <td>
                                 <p class="fw-normal mb-1">{{$detail->movie}}</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">{{$detail->addon}}</p>
+                                <p class="fw-normal mb-1">Jumlah: {{$detail->jml_addon}}</p>
+
                             </td>
                             <td>
                                 <p class="fw-normal mb-1">{{$detail->date}}</p>
