@@ -229,7 +229,7 @@
 
             </div>
             <div class="col-12" style="display: grid">
-                <button id="btn-bayar" type="button" class="btn btn-secondary w-100 rounded mx-auto">Lanjutkan</button>
+                <button id="btn-bayar" type="button" class="btn btn-primary w-100 rounded mx-auto">Lanjutkan</button>
             </div>
             <div class="my-5"></div>
             <div data-v-cbcc5384="" style="" class="col-12">

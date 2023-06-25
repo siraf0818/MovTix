@@ -117,6 +117,13 @@ body {
     white-space: nowrap;
 }
 
+.navigation ul li a .title1 {
+  font-size: 28px;
+  color: #fff;
+  padding: 0 10px;
+  line-height: 65px;
+  text-align: center;
+}
 /* curve outside */
 
 .navigation ul li:hover a::before,
@@ -366,6 +373,9 @@ a.badge-delete:hover {
     background: rgb(77,26,0) !important;
 }
 a.badge-edit:hover {
+    background: rgb(77,26,0) !important;
+}
+button.badge-save:hover {
     background: rgb(77,26,0) !important;
 }
 .detail-tiket {
