@@ -27,6 +27,7 @@
                         <th>Name</th>
                         <th>Invoice</th>
                         <th>Movie</th>
+                        <th>Addon</th>
                         <th>Price</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -50,6 +51,9 @@
                         </td>
                         <td>
                             <p class="text-muted mb-0">{{$order->movie}}</p>
+                        </td>
+                        <td>
+                            <p class="text-muted mb-0">{{$order->addon}}</p>
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{number_format($order->total_price, 0, '.', '.');}}</p>

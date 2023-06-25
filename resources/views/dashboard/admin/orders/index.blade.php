@@ -26,6 +26,7 @@
                         <th>Name</th>
                         <th>Invoice</th>
                         <th>Movie</th>
+                        <th>Addon</th>
                         <th>Status</th>
                         <th>Price</th>
                         <th>Action</th>
@@ -48,6 +49,9 @@
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{$order->movie}}</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">{{$order->addon}}</p>
                         </td>
                         <td>
                             @if ($order->payment != null)
@@ -74,8 +78,8 @@
                             @endif
 
                             @else
-                            <span class="badge bg-blue rounded-pill d-inline">
-                                InProgres
+                            <span class="badge bg-info rounded-pill d-inline">
+                                inProgres
                             </span>
                             @endif
                         </td>
@@ -88,15 +92,15 @@
                                     <form action="/dashboard/orders/{{{$order->order_id}}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <a type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
-                                            Delete
-                                        </a>
+                                        <button type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
+                                            delete
+                                        </button>
                                     </form>
 
                                 </div>
                                 <div class="col-lg-6">
-                                    <a href="/dashboard/orders/{{{$order->order_id}}}/" class="badge badge-edit text-white bg-grey rounded-pill d-inline">
-                                        View
+                                    <a href="/dashboard/orders/{{{$order->order_id}}}/" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
+                                        view
                                     </a>
                                 </div>
                             </div>

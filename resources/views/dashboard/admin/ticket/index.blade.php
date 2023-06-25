@@ -24,7 +24,7 @@
                     </div>
                     <div class="col-6 mt-4">
                         <p class="title-date m-0" style="color: rgb(209, 204, 204)">Addon</p>
-                        <p class="date-tiket m-0">-</p>
+                        <p class="date-tiket m-0">{{$tiket->addon}}+{{$tiket->jml_addon}}</p>
                     </div>
                 </div>
                 <hr class="mt-4" style="border: 3px dashed white">
@@ -68,7 +68,7 @@
                             <span class="mx-2">|</span>
 
                             <span>
-                                <a class="trailer bg-gray text-decoration-none" href="{{ $movie['trailerUrl'] }}">
+                                <a class="trailer bg-gray text-decoration-none" target="_blank" href="{{ $movie['trailerUrl'] }}">
                                     Play Trailer
                                 </a>
                             </span>

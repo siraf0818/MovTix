@@ -25,7 +25,8 @@
                     </div>
                     <div class="col-6 mt-4">
                         <p class="title-date m-0" style="color: rgb(209, 204, 204)">Addon</p>
-                        <p class="date-tiket m-0">-</p>
+                        <p class="date-tiket m-0">{{$tiket->addon}}</p>
+                        <p class="date-tiket m-0">{{$tiket->jml_addon}}</p>
                     </div>
                 </div>
                 <hr class="mt-5" style="border: 3px dashed white">

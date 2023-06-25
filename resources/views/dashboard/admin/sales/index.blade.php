@@ -26,6 +26,7 @@
                         <th>Name</th>
                         <th>Invoice</th>
                         <th>Movie</th>
+                        <th>Addon</th>
                         <th>Price</th>
                         <th>Payment Type</th>
                         <th>Status</th>
@@ -51,6 +52,9 @@
                             <p class="fw-normal mb-1">{{$sale->movie}}</p>
                         </td>
                         <td>
+                            <p class="fw-normal mb-1">{{$sale->addon}}</p>
+                        </td>
+                        <td>
                             <p class="fw-normal mb-1">{{number_format($sale->total_price, 0, '.', '.');}}</p>
                         </td>
                         <td>
@@ -65,13 +69,13 @@
                             <div class="row w-100">
                                 <div class="col-lg-6">
                                     <a href="/dashboard/tiket/{{$sale->order_id}}" class="badge badge-edit text-white bg-warning rounded-pill d-inline">
-                                        Tiket
+                                        tiket
                                     </a>
 
                                 </div>
                                 <div class="col-lg-6">
-                                    <a href="/dashboard/sales/{{{$sale->order_id}}}/" class="badge badge-edit text-white bg-grey rounded-pill d-inline">
-                                        View
+                                    <a href="/dashboard/sales/{{{$sale->order_id}}}/" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
+                                        view
                                     </a>
                                 </div>
                             </div>
