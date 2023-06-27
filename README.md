@@ -7,24 +7,6 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Project Arjuna21
-
-Project Arjuna21 adalah project pengembangan aplikasi berbasis web yang bertujuan untuk memudahkan para calon pembeli tiket bioskop membeli dan mengelola tiket. Selain itu dalam aplikasi arjun21 ada user admin yang dapat mengelola aliran data dari custumernya.
-
-## Sites
-url <a href="http://arjuna-mc.site/">http://arjuna-mc.site/</a>
-<ul>
-    <li>
-    demo: Member
-     <ul>
-    
-    - username : member@arjuna-mc.site
-    - password : password
-    </ul>
-        
-        
-    </li>
-</ul>
 ## Extension
 
 - "php": "^8.0.2",
