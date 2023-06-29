@@ -12,7 +12,7 @@
     <div class="recentOrders col-lg-8 p-3" style="min-height: calc(100vh - 60px);">
         <div class="cardHeader row">
             <div class="d-flex align-items-center col-12 col-lg-8 col-md-8">
-                <img src="/img/logo.jpg" alt="" style="width: 45px; height: 45px;" class="rounded-circle">
+                <img src="/img/logo.png" alt="" style="width: 45px; height: 45px;" class="rounded-circle">
                 <div class="ms-3">
                     <p class="fw-bold mb-0">MovTix</p>
                     <p class="text-muted mb-0">movtix@gmail.com</p>

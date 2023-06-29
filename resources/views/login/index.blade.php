@@ -27,6 +27,7 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('/css/util.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('/css/main.css') }}">
 <!--===============================================================================================-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
 </head>
 <body>
 	
@@ -85,14 +86,14 @@
 
             <!-- btn login -->
             <div class="container-login100-form-btn">
-              <button class="btn login100-form-btn" type="submit" name="submit">
+              <button class="login100-form-btn" type="submit" name="submit">
                 Login
               </button>
             </div>
 
 					<div class="text-center p-t-30">
             <p class="text-center text-white" style="font-size: 12px;">Belum memiliki akun? 
-              <a href="/register" style="text-decoration: none; font-weight: bold;">REGISTER</a>
+              <a href="/register" style="text-decoration: none; font-weight: bold;">Register</a>
             </p>
             
             <div class="card-footer text-center text-white">
