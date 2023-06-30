@@ -8,8 +8,8 @@
                 <p class="title-movie mb-2">Movie : {{$tiket->movie}}</p>
                 <div class="row">
                     <div class="col-6 mt-4">
-                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Date</p>
-                        <p class="date-tiket m-0">{{$tiket->date}}</p>
+                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Order</p>
+                        <p class="date-tiket m-0">{{$tiket->order_id}}</p>
                     </div>
                     <div class="col-6 mt-4">
                         <p class="title-date m-0" style="color: rgb(209, 204, 204)">Seat</p>
@@ -19,17 +19,18 @@
                         </p>
                     </div>
                     <div class="col-6 mt-4">
-                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Order</p>
-                        <p class="date-tiket m-0">{{$tiket->order_id}}</p>
+                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Date&Time</p>
+                        <p class="date-tiket m-0">{{$tiket->date}}</p>
+                        <p class="date-tiket m-0">{{$tiket->time}}</p>
                     </div>
                     <div class="col-6 mt-4">
                         <p class="title-date m-0" style="color: rgb(209, 204, 204)">Addon</p>
-                        <p class="date-tiket m-0">{{$tiket->addon}}+{{$tiket->jml_addon}}</p>
+                        <p class="date-tiket m-0">{{$tiket->addon}}</p>
                     </div>
                 </div>
                 <hr class="mt-4" style="border: 3px dashed white">
                 <div class="d-flex justify-content-center">
-                    {!! QrCode::size(230)->generate('RemoteStack') !!}
+                    {!! QrCode::size(230)->generate($movie['trailerUrl']) !!}
                 </div>
             </div>
         </div>
@@ -82,8 +83,6 @@
                     </div>
 
                     <hr class="my-3">
-
-
                     <div class="col-lg-6 mb-2">
                         <div class="cast">
                             <h5>Cast</h5>

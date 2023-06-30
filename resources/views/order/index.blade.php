@@ -99,6 +99,8 @@
                 </div>
                 <input id="date" name="date" type="hidden" value="" required>
                 <input id="price" name="price" type="hidden" value="" required>
+                <input id="tiket_price" name="tiket_price" type="hidden" value="" required>
+                <input id="addon_price" name="addon_price" type="hidden" value="" required>
                 <input type="hidden" name="total_price" value="" required>
                 <input type="hidden" name="id_movie" value="" required>
                 <hr>
@@ -140,15 +142,15 @@
                 </div>
                 <hr>
                 <div class="row">
-                    <div class="col-lg-7 col-12">
+                    <div class="col-4 pe-0">
                         <h4>Makanan & Minuman</h4>
                     </div>
-                    <div class="col-lg-5 col-12">
-                        <div class="col-6 col-lg-12 mb-3 tiket">
+                    <div class="col px-0 d-flex align-items-center mb-1">
+                        <div class="col-6 col-lg-12 tiket">
                             <span id="kurangb" class="rounded">
                                 <i class="bi bi-dash-circle"></i>
                             </span>
-                            <input type="text" id="banyak_addon" autocomplete="off" name="banyak_addon" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly">
+                            <input type="text" id="banyak_addon" autocomplete="off" name="banyak_addon" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly" hidden>
                             <span id="tambahb" class="rounded">
                                 <i class="bi bi-plus-circle"></i>
                             </span>
@@ -161,16 +163,15 @@
                             <label for="addon" class="input-group-prepend">
                                 <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span>
                             </label>
-                            <select id="addon" name="addon" class="form-select" aria-label="Default select example">
-                                <option selected>Pilih Addon</option>
-                                <option>Serbu 1 (Popcorn Salt Kidz + Softdrink-S)</option>
-                                <option>Serbu 2 (Popcorn Salt Kidz + Java Tea-S)</option>
-                                <option>Combo 1 (Popcorn Salt-S + Softdrink-S)</option>
-                                <option>Combo 2 (Popcorn Salt-S + Java Tea-S)</option>
+                            <select id="baddon" autocomplete="off" name="addon[]" class="form-select" aria-label="Default select example">
+                                <option selected>-</option>
+                                @foreach ($viewData["addon"] as $addon)
+                                <option adnp="{{ $addon->getPrice() }}">{{ $addon->getName() }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="col mt-2">
+                    <div id="1addonbs" class="col mt-2">
                         <div class="row">
                             <div class="col-2">
                                 <span class="rounded"><i class="bi bi-cash-coin"></i></span>
@@ -180,11 +181,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6 col-lg-12 mb-3 tiket">
+                    <div id="2addonbs" class="col-6 col-lg-12 mb-3 tiket">
                         <span id="kuranga" class="rounded">
                             <i class="bi bi-dash-circle"></i>
                         </span>
-                        <input type="text" id="jml_addon" autocomplete="off" name="jml_addon" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly">
+                        <input type="text" id="jml_addon" autocomplete="off" name="jml_addon[]" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly">
                         <span id="tambaha" class="rounded">
                             <i class="bi bi-plus-circle"></i>
                         </span>
@@ -210,7 +211,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-9" id="addonbyr">
                         <div class="form-check">
                             <input class="form-check-input invisible" type="checkbox" name="addon" value="" id="addon" checked>
                             <label class="form-check-label" style="font-size: 0.9rem" for="addon">
@@ -218,7 +219,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="col price-a">
+                    <div class="col-3 price-a">
                         <p>00.00</p>
                     </div>
                 </div>
@@ -294,6 +295,112 @@
         var parts = x.toString().split(".");
         parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");
         return parts.join(",");
+    }
+
+    function addonprice(id) {
+        var option = $(`#addonbs${id}`).find('option:selected');
+        var adnprc = option.attr("adnp");
+        var text = option.text();
+        var prices = $(`.price-a`);
+        var price = $(`#price p`);
+        var jml_tiket = $('#jml_tiket');
+        var value = parseInt(jml_tiket.val())
+        var pricea = $(`#pricea${id} p`);
+        var jml_addon = $(`#jml_addon${id}`);
+        var valuea = parseInt(jml_addon.val())
+        var textAddon = $(`#addonbs${id}`).find('option:selected').text();
+        $(`.label-addon${id}`).text(textAddon);
+
+        var textPrice = price.text().split('.').join('');
+        var textPricea = pricea.text().split('.').join('');
+        var textPrices = prices.text().split('.').join('');
+        prices.text(numberWithCommas((parseFloat(textPrices) - (parseFloat(textPricea) * valuea))))
+        var priceTotal = (parseFloat(textPrices) - (parseFloat(textPricea) * valuea)) + (parseFloat(textPrice) * value);
+
+        var ppn = (priceTotal / 100) * 11;
+        $('.ppn').text(numberWithCommas(ppn))
+
+        var totalBayar = priceTotal + ppn;
+        $('.price-total').text(numberWithCommas(totalBayar))
+        $('input[name=total_price]').val(totalBayar)
+        $('input[name=addon_price]').val((parseFloat(textPrices) - (parseFloat(textPricea) * valuea)))
+        $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
+
+        jml_addon.val(0);
+        $(`.jml-addon${id}`).text(0)
+        switch (text) {
+            case textAddon:
+                pricea.text(numberWithCommas(adnprc))
+                $('input[name=price]').val(adnprc);
+                break;
+            default:
+                pricea.text("0.000");
+                $('input[name=price]').val("0.000");
+        }
+
+    }
+
+    function tambahadn(id) {
+        var jml_addon = $(`#jml_addon${id}`);
+        var price = $(`#price p`);
+        var prices = $(`.price-a`);
+        var jml_tiket = $('#jml_tiket');
+        var value = parseInt(jml_tiket.val())
+        var pricea = $(`#pricea${id} p`);
+        var valuea = parseInt(jml_addon.val())
+        var addon = $(`#addonbs${id}`).find('option:selected').text()
+
+        if (addon == "Serbu 1 (Popcorn Salt Kidz + Softdrink-S)") {
+            pricea.text("1.000")
+            $('input[name=price]').val("1.000");
+        }
+
+        valuea++
+        var textPrice = price.text().split('.').join('');
+        var textPricea = pricea.text().split('.').join('');
+        var textPrices = prices.text().split('.').join('');
+        var total = (parseFloat(textPrices)) + (parseFloat(textPricea));
+        var priceTotal = (parseFloat(textPrice) * value) + total;
+        prices.text(numberWithCommas(total))
+
+        var ppn = (priceTotal / 100) * 11;
+        $('.ppn').text(numberWithCommas(ppn))
+
+        var totalBayar = priceTotal + ppn;
+        $('.price-total').text(numberWithCommas(totalBayar))
+        $('input[name=total_price]').val(totalBayar)
+        $('input[name=addon_price]').val(total)
+        $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
+
+        jml_addon.val(valuea)
+        $(`.jml-addon${id}`).text(valuea)
+    }
+
+    function kurangadn(id) {
+        var jml_tiket = $('#jml_tiket');
+        var price = $(`#price p`);
+        var prices = $(`.price-a`);
+        var value = parseInt(jml_tiket.val())
+        var pricea = $(`#pricea${id} p`);
+        var jml_addon = $(`#jml_addon${id}`);
+        var valuea = parseInt(jml_addon.val())
+        if (valuea > 0) {
+            valuea--
+            var textPrice = price.text().split('.').join('');
+            var textPricea = pricea.text().split('.').join('');
+            var textPrices = prices.text().split('.').join('');
+            prices.text(numberWithCommas((parseFloat(textPrices) - (parseFloat(textPricea)))))
+            var priceTotal = (parseFloat(textPrices) - (parseFloat(textPricea))) + (parseFloat(textPrice) * value);
+            var ppn = (priceTotal / 100) * 11;
+            $('.ppn').text(numberWithCommas(ppn))
+            var totalBayar = priceTotal + ppn;
+            $('.price-total').text(numberWithCommas(totalBayar))
+            $('input[name=total_price]').val(totalBayar)
+            $('input[name=addon_price]').val((parseFloat(textPrices) - (parseFloat(textPricea))))
+            $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
+            jml_addon.val(valuea)
+            $(`.jml-addon${id}`).text(valuea)
+        }
     }
 
     $(document).ready(function() {
@@ -401,9 +508,7 @@
             var price = $("#price p");
             var jml_tiket = $('#jml_tiket');
             var value = parseInt(jml_tiket.val())
-            var pricea = $("#pricea p");
-            var jml_addon = $('#jml_addon');
-            var valuea = parseInt(jml_addon.val())
+            var pricea = $(`.price-a`);
             switch (text) {
                 case "12:30":
                     price.text("1.000")
@@ -440,7 +545,7 @@
 
             var textPrice = price.text().split('.').join('');
             var textPricea = pricea.text().split('.').join('');
-            var priceTotal = (parseFloat(textPrice) * value) + (parseFloat(textPricea) * valuea);
+            var priceTotal = (parseFloat(textPrice) * value) + (parseFloat(textPricea));
 
             $(".price-t").text(numberWithCommas(parseFloat(textPrice) * value))
             var ppn = (priceTotal / 100) * 11;
@@ -449,11 +554,16 @@
             var totalBayar = priceTotal + ppn;
             $('.price-total').text(numberWithCommas(totalBayar))
             $('input[name=total_price]').val(totalBayar)
+            $('input[name=addon_price]').val((parseFloat(textPricea)))
+            $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
+
         });
 
-        $('#addon').change(function() {
+        $('#baddon').change(function() {
             var option = $(this).find('option:selected');
+            var adnprc = option.attr("adnp");
             var text = option.text();
+            var prices = $(`.price-a`);
             var price = $("#price p");
             var jml_tiket = $('#jml_tiket');
             var value = parseInt(jml_tiket.val())
@@ -462,39 +572,33 @@
             var valuea = parseInt(jml_addon.val())
             var textAddon = $(this).find('option:selected').text();
             $(".label-addon").text(textAddon);
-            switch (text) {
-                case "Serbu 1 (Popcorn Salt Kidz + Softdrink-S)":
-                    pricea.text("1.000")
-                    $('input[name=price]').val("1.000");
-                    break;
-                case "Serbu 2 (Popcorn Salt Kidz + Java Tea-S)":
-                    pricea.text("2.000")
-                    $('input[name=price]').val("2.000");
-                    break;
-                case "Combo 1 (Popcorn Salt-S + Softdrink-S)":
-                    pricea.text("3.000")
-                    $('input[name=price]').val("3.000");
-                    break;
-                case "Combo 2 (Popcorn Salt-S + Java Tea-S)":
-                    pricea.text("4.000")
-                    $('input[name=price]').val("4.000");
-                    break;
-                default:
-                    pricea.text("0.000");
-                    $('input[name=price]').val("0.000");
-            }
 
             var textPrice = price.text().split('.').join('');
             var textPricea = pricea.text().split('.').join('');
-            var priceTotal = (parseFloat(textPrice) * value) + (parseFloat(textPricea) * valuea);
+            var textPrices = prices.text().split('.').join('');
+            prices.text(numberWithCommas((parseFloat(textPrices) - (parseFloat(textPricea) * valuea))))
+            var priceTotal = (parseFloat(textPrices) - (parseFloat(textPricea) * valuea)) + (parseFloat(textPrice) * value);
 
-            $(".price-a").text(numberWithCommas(parseFloat(textPricea) * valuea))
             var ppn = (priceTotal / 100) * 11;
             $('.ppn').text(numberWithCommas(ppn))
 
             var totalBayar = priceTotal + ppn;
             $('.price-total').text(numberWithCommas(totalBayar))
             $('input[name=total_price]').val(totalBayar)
+            $('input[name=addon_price]').val((parseFloat(textPrices) - (parseFloat(textPricea) * valuea)))
+            $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
+
+            jml_addon.val(0);
+            $(`.jml-addon`).text(0)
+            switch (text) {
+                case textAddon:
+                    pricea.text(numberWithCommas(adnprc))
+                    $('input[name=price]').val(adnprc);
+                    break;
+                default:
+                    pricea.text("0.000");
+                    $('input[name=price]').val("0.000");
+            }
         });
 
         $("#kurang").on('click', function() {
@@ -503,9 +607,7 @@
             var seat = $("#seat");
             var price = $("#price p");
             var value = parseInt(jml_tiket.val())
-            var pricea = $("#pricea p");
-            var jml_addon = $('#jml_addon');
-            var valuea = parseInt(jml_addon.val())
+            var pricea = $(`.price-a`);
             if (value > 0) {
                 value--
                 jml_tiket.val(value)
@@ -514,7 +616,7 @@
 
                 var textPrice = price.text().split('.').join('');
                 var textPricea = pricea.text().split('.').join('');
-                var priceTotal = (parseFloat(textPrice) * value) + (parseFloat(textPricea) * valuea);
+                var priceTotal = (parseFloat(textPrice) * value) + (parseFloat(textPricea));
 
                 $(".price-t").text(numberWithCommas(parseFloat(textPrice) * value))
                 var ppn = (priceTotal / 100) * 11;
@@ -523,6 +625,8 @@
                 var totalBayar = priceTotal + ppn;
                 $('.price-total').text(numberWithCommas(totalBayar))
                 $('input[name=total_price]').val(totalBayar)
+                $('input[name=addon_price]').val(parseFloat(textPricea))
+                $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
             }
         });
 
@@ -531,9 +635,7 @@
             var jml_tiket = $('#jml_tiket');
             var price = $("#price p");
             var value = parseInt(jml_tiket.val())
-            var pricea = $("#pricea p");
-            var jml_addon = $('#jml_addon');
-            var valuea = parseInt(jml_addon.val())
+            var pricea = $(`.price-a`);
             var seat = $("#seat");
             var time = $("#time").find('option:selected').text()
 
@@ -548,7 +650,7 @@
 
             var textPrice = price.text().split('.').join('');
             var textPricea = pricea.text().split('.').join('');
-            var priceTotal = (parseFloat(textPrice) * value) + (parseFloat(textPricea) * valuea);
+            var priceTotal = (parseFloat(textPrice) * value) + (parseFloat(textPricea));
             $(".price-t").text(numberWithCommas(parseFloat(textPrice) * value))
 
             var ppn = (priceTotal / 100) * 11;
@@ -557,6 +659,8 @@
             var totalBayar = priceTotal + ppn;
             $('.price-total').text(numberWithCommas(totalBayar))
             $('input[name=total_price]').val(totalBayar)
+            $('input[name=addon_price]').val(parseFloat(textPricea))
+            $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
 
             var lengtseat = seat.children('input').length;
 
@@ -567,30 +671,29 @@
 
         $("#kuranga").on('click', function() {
             var jml_tiket = $('#jml_tiket');
-            var classrm = ".id-ch" + jml_tiket.val();
-            var seat = $("#seat");
             var price = $("#price p");
+            var prices = $(`.price-a`);
             var value = parseInt(jml_tiket.val())
             var pricea = $("#pricea p");
             var jml_addon = $('#jml_addon');
             var valuea = parseInt(jml_addon.val())
             if (valuea > 0) {
                 valuea--
-                jml_addon.val(valuea)
-                $(".jml-addon").text(valuea)
-                seat.children('input').last().remove()
-
                 var textPrice = price.text().split('.').join('');
                 var textPricea = pricea.text().split('.').join('');
-                var priceTotal = (parseFloat(textPrice) * value) + (parseFloat(textPricea) * valuea);
-
-                $(".price-a").text(numberWithCommas(parseFloat(textPricea) * valuea))
+                var textPrices = prices.text().split('.').join('');
+                prices.text(numberWithCommas((parseFloat(textPrices) - (parseFloat(textPricea)))))
+                console.log((parseFloat(textPricea) * valuea));
+                var priceTotal = (parseFloat(textPrices) - (parseFloat(textPricea))) + (parseFloat(textPrice) * value);
                 var ppn = (priceTotal / 100) * 11;
                 $('.ppn').text(numberWithCommas(ppn))
-
                 var totalBayar = priceTotal + ppn;
                 $('.price-total').text(numberWithCommas(totalBayar))
                 $('input[name=total_price]').val(totalBayar)
+                $('input[name=addon_price]').val((parseFloat(textPrices) - (parseFloat(textPricea))))
+                $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
+                jml_addon.val(valuea)
+                $(".jml-addon").text(valuea)
             }
         });
 
@@ -598,6 +701,7 @@
         $("#tambaha").on('click', function() {
             var jml_addon = $('#jml_addon');
             var price = $("#price p");
+            var prices = $(`.price-a`);
             var jml_tiket = $('#jml_tiket');
             var value = parseInt(jml_tiket.val())
             var pricea = $("#pricea p");
@@ -609,15 +713,13 @@
                 $('input[name=price]').val("1.000");
 
             }
-
             valuea++
-            jml_addon.val(valuea)
-            $(".jml-addon").text(valuea)
-
             var textPrice = price.text().split('.').join('');
             var textPricea = pricea.text().split('.').join('');
-            var priceTotal = (parseFloat(textPrice) * value) + (parseFloat(textPricea) * valuea);
-            $(".price-a").text(numberWithCommas(parseFloat(textPricea) * valuea))
+            var textPrices = prices.text().split('.').join('');
+            var total = (parseFloat(textPrices)) + (parseFloat(textPricea));
+            var priceTotal = (parseFloat(textPrice) * value) + total;
+            prices.text(numberWithCommas(total))
 
             var ppn = (priceTotal / 100) * 11;
             $('.ppn').text(numberWithCommas(ppn))
@@ -625,38 +727,75 @@
             var totalBayar = priceTotal + ppn;
             $('.price-total').text(numberWithCommas(totalBayar))
             $('input[name=total_price]').val(totalBayar)
-
-
+            $('input[name=addon_price]').val(total)
+            $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
+            jml_addon.val(valuea)
+            $(".jml-addon").text(valuea)
         });
 
         $("#kurangb").on('click', function() {
             var banyak_addon = $('#banyak_addon');
             var valueb = parseInt(banyak_addon.val())
             if (valueb > 0) {
+                var jml_tiket = $('#jml_tiket');
+                var price = $("#price p");
+                var prices = $(`.price-a`);
+                var value = parseInt(jml_tiket.val())
+                var pricea = $(`#pricea${valueb} p`);
+                var jml_addon = $(`#jml_addon${valueb}`);
+                var valuea = parseInt(jml_addon.val())
+                if (valuea > 0) {
+                    var textPrice = price.text().split('.').join('');
+                    var textPricea = pricea.text().split('.').join('');
+                    var textPrices = prices.text().split('.').join('');
+                    prices.text(numberWithCommas((parseFloat(textPrices) - (parseFloat(textPricea) * valuea))))
+                    var priceTotal = (parseFloat(textPrices) - (parseFloat(textPricea)) * valuea) + (parseFloat(textPrice) * value);
+                    var ppn = (priceTotal / 100) * 11;
+                    $('.ppn').text(numberWithCommas(ppn))
+                    var totalBayar = priceTotal + ppn;
+                    $('.price-total').text(numberWithCommas(totalBayar))
+                    $('input[name=total_price]').val(totalBayar)
+                    $('input[name=addon_price]').val((parseFloat(textPrices) - (parseFloat(textPricea) * valuea)))
+                    $('input[name=tiket_price]').val((parseFloat(textPrice) * value))
+                    jml_addon.val(valuea)
+                    $(`.jml-addon${valueb}`).text(valuea)
+                    valuea--
+                }
+                $(`#addonbss${valueb}`).remove();
+                $(`#1addonbs${valueb}`).remove();
+                $(`#2addonbs${valueb}`).remove();
+                $(`#1addonbyr${valueb}`).remove();
+                $(`#2addonbyr${valueb}`).remove();
                 valueb--
                 banyak_addon.val(valueb)
                 $(".banyak_addon").text(valueb)
-                $('#addonb').remove();
             }
         });
 
-
         $("#tambahb").on('click', function() {
             var banyak_addon = $('#banyak_addon');
-            var addonbs = $('.addonbs');
-            var valueb = parseInt(banyak_addon.val())
-            valueb++
-            banyak_addon.val(valueb)
-            $(".banyak_addon").text(valueb)
-            $('#addonb').append('<div class="col-lg-10 col-12"><div class="input-group mb-3"><label for="addon" class="input-group-prepend"><span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span></label><select id="addonbs" name="addon" class="form-select" aria-label="Default select example">    <option selected>Pilih Addon</option>                <option>Serbu 1 (Popcorn Salt Kidz + Softdrink-S)</option>  <option>Serbu 2 (Popcorn Salt Kidz + Java Tea-S)</option>   <option>Combo 1 (Popcorn Salt-S + Softdrink-S)</option>    <option>Combo 2 (Popcorn Salt-S + Java Tea-S)</option>      </select></div></div><div class="col mt-2"><div class="row"> <div class="col-2"> <span class="rounded"><i class="bi bi-cash-coin"></i></span> </div> <div id="pricea" class="col"> <p>00.00</p> </div></div></div><div class="col-6 col-lg-12 mb-3 tiket"><span id="kuranga" class="rounded"> <i class="bi bi-dash-circle"></i>          </span><input type="text" id="jml_addon" autocomplete="off" name="jml_addon" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly"> <span id="tambaha" class="rounded"><i class="bi bi-plus-circle"></i> </span></div>');
+            var valueb = parseInt(banyak_addon.val());
+            valueb++;
+            banyak_addon.val(valueb);
+            $(".banyak_addon").text(valueb);
+            $('#addonb').append(`<div id="addonbss${valueb}" class="col-lg-10 col-12"><div class="input-group mb-3"><label for="addon${valueb}" class="input-group-prepend"><span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span></label><select id="addonbs${valueb}" onchange="addonprice(${valueb})" autocomplete="off" name="addon[]" class="form-select" aria-label="Default select example">    <option selected>-</option>
+                                @foreach ($viewData["addon"] as $addon)
+                                <option adnp="{{ $addon->getPrice() }}">{{ $addon->getName() }}</option>
+                                @endforeach</select></div></div><div id="1addonbs${valueb}" class="col mt-2"><div class="row"> <div class="col-2"> <span class="rounded"><i class="bi bi-cash-coin"></i></span> </div> <div id="pricea${valueb}" class="col"> <p>00.00</p> </div></div></div><div id="2addonbs${valueb}" class="col-6 col-lg-12 mb-3 tiket"><span id="kuranga${valueb}" onClick="kurangadn(${valueb})" class="rounded"> <i class="bi bi-dash-circle"></i> </span><input type="text" id="jml_addon${valueb}" autocomplete="off" name="jml_addon[]" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly"> <span id="tambaha${valueb}"  onClick="tambahadn(${valueb})" class="rounded"><i class="bi bi-plus-circle"></i> </span></div></div>`);
+            $('#addonbyr').append(`<div class="col-9" id="1addonbyr${valueb}">
+                        <div class="form-check">
+                            <input class="form-check-input invisible" type="checkbox" name="addon" value="" id="addon${valueb}" checked>
+                            <label class="form-check-label" style="font-size: 0.9rem" for="addon${valueb}">
+                                <span class="label-addon${valueb}">Addon</span> | <span class="jml-addon${valueb}">0</span>
+                            </label>
+                        </div>
+                    </div>`);
         });
 
         $(".show-seat span").on('click', function() {
-
             var seat = $("#seat");
             var jml_tiket = $('#jml_tiket').val();
             var lengtseat = seat.children('input').length;
-
             if (lengtseat < jml_tiket) {
                 seat.append("<input type='text' class='text-white' name='seat[]' style='width: 30px; background-color:transparent; border: none;' value='" + $(this).text() + "' readonly='readonly'>")
             } else {
@@ -667,13 +806,13 @@
         $('#btn-bayar').on('click', function() {
             $("#submitform").click()
         })
+
         $(document).on('click', ".list-item-sc", function() {
             var txtdefault = $(".text-date p");
             txtdefault.text($(this).text());
             $('input[name=date]').val($(this).text());
             $('.dropdwn-sc').addClass("invisible");
         });
-
 
         $(document).on("click", ".opt-movie", function() {
             var textMovie = $(this).find('span').text();
@@ -682,7 +821,6 @@
             var theater = $('#theater').find('option:selected').attr('id');
             var movie = $(this).attr('id')
             $('input[name=id_movie]').val(movie)
-
             $.ajax({
                 type: "POST",
                 url: "{{ route('order.schedules.details') }}",
@@ -695,13 +833,10 @@
                     var dateDta = data.playTime[0].date;
                     var strDate = dateDta.split('2023').join('2023 ')
                     var word = strDate.split(' ')
-
                     $("#list-date").empty();
-
                     $.each(word, function(index, value) {
                         if (index != word.length) {
                             $("#list-date").append("<li class='list-item-sc bgg'>" + value + "</li>")
-
                         }
                     })
                     $('input[name=date]').val(word[0])
@@ -712,7 +847,6 @@
                     console.log(data);
                 },
             });
-
             $('.dropdown').addClass("invisible");
         });
     });

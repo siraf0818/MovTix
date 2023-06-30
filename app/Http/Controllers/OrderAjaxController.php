@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Movie;
 use App\Models\Payment;
+use App\Models\Addon;
 use Illuminate\Http\Request;
 
 class OrderAjaxController extends Controller

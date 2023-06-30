@@ -42,11 +42,10 @@
                     <thead class="bg-light">
                         <tr>
                             <th>Invoice</th>
-                            <th>Movie</th>
-                            <th>Addon</th>
                             <th>Date Time</th>
-                            <th>Price</th>
+                            <th>Movie</th>
                             <th>Tickets</th>
+                            <th>Addons</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,21 +54,19 @@
                                 <p class="fw-normal mb-1">#{{$detail->order_id}}</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">{{$detail->movie}}</p>
-                            </td>
-                            <td>
-                                <p class="fw-normal mb-1">{{$detail->addon}}</p>
-                                <p class="fw-normal mb-1">Jumlah: {{$detail->jml_addon}}</p>
-                            </td>
-                            <td>
                                 <p class="fw-normal mb-1">{{$detail->date}}</p>
                                 <p class="text-muted mb-0">{{$detail->time}}</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">RP. {{number_format($price, 0, '.', '.');}}</p>
+                                <p class="fw-normal mb-1">{{$detail->movie}}</p>
                             </td>
                             <td>
                                 <p class="fw-normal mb-1">{{$detail->jml_tiket}} Tickets</p>
+                                <p class="fw-normal mb-1">Total: Rp.{{$detail->tiket_price}}</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">{{$detail->addon}}</p>
+                                <p class="fw-normal mb-1">Total: Rp.{{$detail->addon_price}}</p>
                             </td>
                         </tr>
                     </tbody>

@@ -54,6 +54,11 @@ Route::middleware('admin')->group(function () {
     Route::resource('/dashboard/sales', AdminSalesController::class);
     Route::resource('/dashboard/orders', AdminOrderController::class);
     Route::resource('/dashboard/customers', AdminCustomer::class);
+    Route::get('/dashboard/addon', 'App\Http\Controllers\AdminAddonController@index')->name("dashboard.admin.addon.index");
+    Route::post('/dashboard/addon/store', 'App\Http\Controllers\AdminAddonController@store')->name("dashboard.admin.addon.store");
+    Route::delete('/dashboard/addon/{id}/delete', 'App\Http\Controllers\AdminAddonController@delete')->name("dashboard.admin.addon.delete");
+    Route::get('/dashboard/addon/{id}/edit', 'App\Http\Controllers\AdminAddonController@edit')->name("dashboard.admin.addon.edit");
+    Route::put('/dashboard/addon/{id}/update', 'App\Http\Controllers\AdminAddonController@update')->name("dashboard.admin.addon.update");
 });
 
 // route auth

@@ -52,6 +52,11 @@ class Dashboard extends Model
                 'link' => '/dashboard/customers'
             ],
             [
+                'title' => 'Addons',
+                'icon' => 'bag-check-outline',
+                'link' => '/dashboard/addon'
+            ],
+            [
                 'title' => 'Orders',
                 'icon' => 'bag-check-outline',
                 'link' => '/dashboard/orders'
