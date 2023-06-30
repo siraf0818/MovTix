@@ -26,7 +26,9 @@
                         <p class="m-0 p-0">{{$auth->email}}</p>
                     </div>
                     <div class="img">
-                        <img src="/{{$auth->image}}" alt="">
+                        <a href="/">
+                            <img src="/{{$auth->image}}" alt="">
+                        </a>
                     </div>
                 </div>
             </div>

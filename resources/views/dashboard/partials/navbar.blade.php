@@ -1,7 +1,7 @@
 <div class="navigation active">
     <ul>
         <li>
-            <a href="">
+            <a href="/">
                 <span class="icon">
                     <img src="/img/logo.png" alt="" style="width: 40px; height: 40px;">
                 </span>
