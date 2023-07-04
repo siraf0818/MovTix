@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('seats', function (Blueprint $table) {
+        Schema::create('theaters', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->string('order_id');
-            $table->string('penayangan_id');
-            $table->foreign('order_id')->references('order_id')->on('orders')->onDelete('cascade');
-            $table->foreign('penayangan_id')->references('id')->on('penayangans')->onDelete('cascade');
-            $table->string('no_seat');
+            $table->string('code');
+            $table->string('name');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('seats');
+        Schema::dropIfExists('theaters');
     }
 };

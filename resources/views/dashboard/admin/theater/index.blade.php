@@ -2,7 +2,7 @@
 @section('container')
 <div class="card mb-4">
     <div class="card-header">
-        Create addon
+        Create theater
     </div>
     <div class="card-body">
         @if($errors->any())
@@ -12,9 +12,17 @@
             @endforeach
         </ul>
         @endif
-        <form method="POST" action="{{ route('dashboard.admin.addon.store') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('dashboard.admin.theater.store') }}" enctype="multipart/form-data">
             @csrf
             <div class="row">
+                <div class="col">
+                    <div class="mb-3 row">
+                        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">ID:</label>
+                        <div class="col-lg-10 col-md-6 col-sm-12">
+                            <input name="id" value="{{ old('id') }}" type="text" class="form-control">
+                        </div>
+                    </div>
+                </div>
                 <div class="col">
                     <div class="mb-3 row">
                         <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Name:</label>
@@ -25,28 +33,15 @@
                 </div>
                 <div class="col">
                     <div class="mb-3 row">
-                        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Price:</label>
+                        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Status:</label>
                         <div class="col-lg-10 col-md-6 col-sm-12">
-                            <input name="price" value="{{ old('price') }}" type="number" class="form-control">
+                            <select autocomplete="off" name="status" class="form-select">
+                                <option selected>-</option>
+                                <option>Available</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="mb-3 row">
-                        <label class="col-lg-2 col-md-6 col-sm-12 col-form-label">Image:</label>
-                        <div class="col-lg-10 col-md-6 col-sm-12">
-                            <input class="form-control" type="file" name="image">
-                        </div>
-                    </div>
-                </div>
-                <div class="col"> &nbsp;
-                </div>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Description</label>
-                <textarea class="form-control" name="description" rows="3">{{ old('description') }}</textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
@@ -54,7 +49,7 @@
 </div>
 <div class="card">
     <div class="card-header">
-        Manage addon
+        Manage theater
     </div>
     <div class="search" style="width: 200px; height: 40px; padding-bottom: 8px;">
         <label for="" style="height: 100%;">
@@ -66,26 +61,25 @@
         <table class="table table-bordered table-striped">
             <thead>
                 <tr>
+                    <th scope="col">ID</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Price</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($viewData["addon"] as $addon)
+                @foreach ($viewData["theater"] as $theater)
                 <tr>
+                    <td>{{ $theater->getId() }}</td>
                     <td>
-                        <img src="{{asset('/storage/'.$addon->getImage())}}" alt="" style="width: 45px; height: 45px;" class="rounded-circle">
-                        {{ $addon->getName() }}
+                        {{ $theater->getName() }}
                     </td>
-                    <td>{{ $addon->getDescription() }}</td>
-                    <td>{{ $addon->getPrice() }}</td>
+                    <td>{{ $theater->getStatus() }}</td>
                     <td>
-                        <a class="btn btn-primary" href="{{route('dashboard.admin.addon.edit', ['id'=> $addon->getId()])}}">
+                        <a class="btn btn-primary" href="{{route('dashboard.admin.theater.edit', ['id'=> $theater->getId()])}}">
                             <i class="bi-pencil"></i>
                         </a>
-                        <form action="{{ route('dashboard.admin.addon.delete', $addon->getId())}}" method="POST">
+                        <form action="{{ route('dashboard.admin.theater.delete', $theater->getId())}}" method="POST">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" onclick="return confirm(' Are you sure?')">
@@ -98,4 +92,10 @@
         </table>
     </div>
 </div>
+<script>
+    $('#id').change(function() {
+        var id = $('#id').val();
+        $('#code').val(id);
+    });
+</script>
 @endsection

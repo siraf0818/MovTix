@@ -10,6 +10,8 @@
     <link rel="icon" type="image/x-icon" href="/img/logo.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
+
 </head>
 
 <body>
@@ -113,6 +115,27 @@
                                     order_status = "<span class='badge bg-info rounded-pill d-inline'>inProgres</span>"
                                 }
                                 row.append("<tr><td><div class='d-flex align-items-center'><img src='/" + value.user.image + "' alt='' style='width: 45px; height: 45px;' class='rounded-circle'><div class='ms-3'><p class='fw-bold mb-1'>" + value.user.name + "</p><p class='text-muted mb-0'>" + value.user.email + "</p></div></div></td><td><p class='fw-normal mb-1'>#" + value.order_id + "</p></td><td><p class='fw-normal mb-1'>" + value.movie + "</p><p class='text-muted mb-0'>" + value.theater + "</p></td><td>" + order_status + "</td><td><p class='fw-normal mb-1'>" + price + "</p></td><td><div class='row w-100'><div class='col-lg-6'><a href='/dashboard/member/orders/" + value.order_id + "' class='badge badge-edit text-white bg-primary rounded-pill d-inline'>view</a></div><div class='col-lg-6'><a href='/dashboard/member/orders/" + value.order_id + "' class='badge badge-edit text-white bg-secondary rounded-pill d-inline'>pay</a></div></div></td></tr>");
+                            });
+                        } else if (currUrl == '/dashboard/addon') {
+                            row.empty()
+                            var method = '@csrf';
+                            var methodel = `@method('DELETE')`;
+                            $.each(data, function(index, value) {
+                                row.append("<tr><td><div class='d-flex align-items-center'><img src='/storage/" + value.image + "' alt='' style='width: 45px; height: 45px;' class='rounded-circle'><div class='ms-3'><p class='text-muted mb-0'>" + value.name + "</p></div></div></td><td><p class='text-muted mb-0'>" + value.description + "</p></td><td><p class='text-muted mb-0'>" + value.price + "</p></td><td><a class='btn btn-primary' href='/dashboard/addon/" + value.id + "/edit'><i class='bi-pencil'></i>   </a><form action=/dashboard/addon/" + value.id + "/delete method='POST'>" + method + methodel + "<button onclick=" + "return confirm('Are you sure?')" + " class='btn btn-danger'><i class='bi-trash'></i></button></form></div></td></tr>")
+                            });
+                        } else if (currUrl == '/dashboard/penayangan') {
+                            row.empty()
+                            var method = '@csrf';
+                            var methodel = `@method('DELETE')`;
+                            $.each(data, function(index, value) {
+                                row.append("<tr><td><div class='ms-3'><p class='text-muted mb-0'>" + value.theater + value.date + value.time + "</p></div></td><td><p class='text-muted mb-0'>" + value.theater + "</p></td><td><p class='text-muted mb-0'>" + value.date + "</p></td><td><p class='text-muted mb-0'>" + value.time + "</p></td><td><p class='text-muted mb-0'>" + value.movie + "</p></td><td><p class='text-muted mb-0'>" + value.tiket_price + "</p></td><td><a class='btn btn-primary' href='/dashboard/penayangan/" + value.theater + value.date + value.time + "/edit'><i class='bi-pencil'></i>   </a><form action=/dashboard/penayangan/" + value.theater + value.date + value.time + "/delete method='POST'>" + method + methodel + "<button onclick=" + "return confirm('Are you sure?')" + " class='btn btn-danger'><i class='bi-trash'></i></button></form></div></td></tr>")
+                            });
+                        } else if (currUrl == '/dashboard/theater') {
+                            row.empty()
+                            var method = '@csrf';
+                            var methodel = `@method('DELETE')`;
+                            $.each(data, function(index, value) {
+                                row.append("<tr><td><div class='ms-3'><p class='text-muted mb-0'>" + value.code + "</p></div></td><td><p class='text-muted mb-0'>" + value.name + "</p></td><td><p class='text-muted mb-0'>" + value.status + "</p></td><td><a class='btn btn-primary' href='/dashboard/theater/" + value.code + "/edit'><i class='bi-pencil'></i>   </a><form action=/dashboard/theater/" + value.code + "/delete method='POST'>" + method + methodel + "<button onclick=" + "return confirm('Are you sure?')" + " class='btn btn-danger'><i class='bi-trash'></i></button></form></div></td></tr>")
                             });
                         }
                     },

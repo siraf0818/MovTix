@@ -8,7 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Seat extends Model
 {
     use HasFactory;
-    protected $guarded = ['id'];
+    public $incrementing = false;
+    protected $primaryKey = 'id';
 
     public function order()
     {

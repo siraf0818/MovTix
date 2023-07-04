@@ -52,8 +52,18 @@ class Dashboard extends Model
                 'link' => '/dashboard/customers'
             ],
             [
+                'title' => 'Theater',
+                'icon' => 'film-outline',
+                'link' => '/dashboard/theater'
+            ],
+            [
+                'title' => 'Penayangan',
+                'icon' => 'film-outline',
+                'link' => '/dashboard/penayangan'
+            ],
+            [
                 'title' => 'Addons',
-                'icon' => 'bag-check-outline',
+                'icon' => 'fish-outline',
                 'link' => '/dashboard/addon'
             ],
             [

@@ -5,32 +5,45 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use App\Models\Payment;
 use App\Models\Addon;
+use App\Models\Penayangan;
 use Illuminate\Http\Request;
 
 class OrderAjaxController extends Controller
 {
-    public function cities(Request $request)
+    public function dates(Request $request)
     {
-        $type = Movie::getTheaters($request->cityid)->keys(0);
-        return $type;
+        $dates = Penayangan::getDateDtl($request->movie_id);
+        return $dates;
+    }
+
+    public function times(Request $request)
+    {
+        $times = Penayangan::getTimeDtl($request->movie_id, $request->date);
+        return $times;
     }
 
     public function theaters(Request $request)
     {
-        $theaters = Movie::getTheaters($request->city_id)[$request->type];
+        $theaters = Penayangan::getTheaterDtl($request->movie_id, $request->date, $request->time);
         return $theaters;
     }
 
-    public function schedules(Request $request)
+    public function prices(Request $request)
     {
-        $schedules = Movie::getSchedules($request->theater);
-        return $schedules;
+        $prices = Penayangan::getPriceDtl($request->movie_id, $request->date, $request->time, $request->theater);
+        return $prices;
     }
 
-    public function schedulesDetails(Request $request)
+    public function ids(Request $request)
     {
-        $schedules = Movie::getSchedulesDetail($request->theater_id, $request->movie_id);
-        return $schedules;
+        $ids = Penayangan::getIdDtl($request->movie_id, $request->date, $request->time, $request->theater);
+        return $ids;
+    }
+
+    public function seats(Request $request)
+    {
+        $seats = Penayangan::getSeatDtl($request->penayangan_id);
+        return $seats;
     }
 
     public function pendingPayment(Request $request)

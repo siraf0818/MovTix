@@ -6,6 +6,7 @@ use App\Models\Movie;
 use App\Models\Order;
 use App\Models\Seat;
 use App\Models\Addon;
+use App\Models\Penayangan;
 use App\Models\User;
 use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
@@ -19,13 +20,13 @@ class OrderController extends Controller
     {
         $viewData = [];
         $viewData["addon"] = Addon::all();
-
-        $posts = Movie::getMovie();
+        $posts = Penayangan::penayanganDetails();
+        $pick = Penayangan::all();
         return view('order.index', [
             'title' => 'Pembayaran',
             'active' => 'order',
             'posts' => $posts,
-            "cities" => Movie::getCities(),
+            'pick' => $pick,
         ])->with("viewData", $viewData);
     }
 
@@ -54,6 +55,7 @@ class OrderController extends Controller
         $request['user_id'] = auth()->user()->id;
         $faker = Faker::create('id_ID');
         $order_id = $faker->bothify('?????-#####');
+        $penayangan_id = $request->penayangan_id;
         $request['order_id'] = $order_id;
 
         $midtrans = new CreateSnapTokenService($request);
@@ -62,11 +64,13 @@ class OrderController extends Controller
         $validatedData = $request->validate([
             'order_id' => 'required',
             'total_price' => 'required',
+            'penayangan_id' => 'required',
             'theater' => 'required',
             'date' => 'required',
             'time' => 'required',
             'movie' => 'required',
             'addon' => 'required',
+            'seat' => 'required||unique:orders,seat_id',
             'jml_addon' => 'required',
             'id_movie' => 'required',
             'jml_tiket' => 'required',
@@ -75,8 +79,8 @@ class OrderController extends Controller
         $validatedData['snap_token'] = $snapToken;
         $validatedData['payment_id'] = $order_id;
         $validatedData['seat_id'] = $order_id;
-
         $id = Order::find($order_id);
+
         $addono = [];
         foreach ($request->addon as $key => $value) {
             $a = $request->addon[$key];
@@ -84,37 +88,49 @@ class OrderController extends Controller
             $addono[] = $a . '(' . $j . ')';
         }
 
-        if ($id == null) {
-            Order::create([
-                'order_id' => $request->order_id,
-                'user_id' => $request->user_id,
-                'payment_id' => $order_id,
-                'seat_id' => $request->order_id,
-                'theater' => $request->theater,
-                'date' => $request->date,
-                'time' => $request->time,
-                'id_movie' => $request->id_movie,
-                'movie' => $request->movie,
-                'jml_tiket' => $request->jml_tiket,
-                'tiket_price' => $request->tiket_price,
-                'addon' => implode(' & ', $addono),
-                'addon_price' => $request->addon_price,
-                'total_price' => $request->total_price,
-                'snap_token' => $snapToken,
-            ]);
+        DB::beginTransaction();
 
-            $seat = array();
-            foreach ($request->seat as $item) {
-                array_push($seat, [
-                    'order_id' => $order_id,
-                    'no_seat' => $item,
-                    "created_at" =>  date('Y-m-d H:i:s'),
+        try {
+            if ($id == null) {
+                Order::create([
+                    'order_id' => $request->order_id,
+                    'user_id' => $request->user_id,
+                    'payment_id' => $order_id,
+                    'seat_id' =>  $request->order_id,
+                    'penayangan_id' => $request->penayangan_id,
+                    'theater' => $request->theater,
+                    'date' => $request->date,
+                    'time' => $request->time,
+                    'id_movie' => $request->id_movie,
+                    'movie' => $request->movie,
+                    'jml_tiket' => $request->jml_tiket,
+                    'tiket_price' => $request->tiket_price,
+                    'addon' => implode(' & ', $addono),
+                    'addon_price' => $request->addon_price,
+                    'total_price' => $request->total_price,
+                    'snap_token' => $snapToken,
                 ]);
+                $seat = array();
+                foreach ($request->seat as $item) {
+                    $seatid = $item . $penayangan_id;
+                    array_push($seat, [
+                        'id' => $seatid,
+                        'order_id' => $order_id,
+                        'penayangan_id' => $penayangan_id,
+                        'no_seat' => $item,
+                        "created_at" =>  date('Y-m-d H:i:s'),
+                        "updated_at" =>  date('Y-m-d H:i:s'),
+                    ]);
+                }
+                Seat::insert($seat);
             }
-            Seat::insert($seat);
+            session()->forget('order_id');
+            session()->put('order_id', $order_id);
+            DB::commit();
+            return redirect('payment');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('order')->with('warning', 'Something Went Wrong!');
         }
-        session()->forget('order_id');
-        session()->put('order_id', $order_id);
-        return redirect('payment');
     }
 }
