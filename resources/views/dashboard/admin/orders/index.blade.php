@@ -1,6 +1,7 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
+<script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{config('midtrans.client_key')}}"></script>
 <div class="details mt-2 row px-4 gap-3 position-relative">
     @if (session()->has('messege'))
     <div style="left: 50%;
@@ -27,8 +28,8 @@
                         <th>Invoice</th>
                         <th>Movie</th>
                         <th>Addon</th>
-                        <th>Status</th>
                         <th>Price</th>
+                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -52,6 +53,9 @@
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{$order->addon}}</p>
+                        </td>
+                        <td>
+                            <p class="fw-normal mb-1">{{number_format($order->total_price, 0, '.', '.');}}</p>
                         </td>
                         <td>
                             @if ($order->payment != null)
@@ -84,11 +88,28 @@
                             @endif
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">{{number_format($order->total_price, 0, '.', '.');}}</p>
-                        </td>
-                        <td>
                             <div class="row w-100">
-                                <div class="col-lg-6">
+                                <div class="col-lg-4">
+                                    <a href="/dashboard/orders/{{{$order->order_id}}}/" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
+                                        view
+                                    </a>
+                                </div>
+
+                                <div class="col-4">
+
+                                    <a href="#" class="badge btn-bayar badge-edit  text-white bg-secondary rounded-pill d-inline">
+                                        pay
+
+                                        @if ($order->payment == null || $order->payment->transaction_status != "settlement" && $order->payment->transaction_status != "capture" )
+                                        <input type="hidden" name="snap_token" value="{{$order->snap_token}}">
+
+                                        @endif
+                                        <input type="hidden" name="order_id" value="{{$order->order_id}}">
+                                        <input type="hidden" name="gross_amount" value="{{$order->total_price}}">
+                                    </a>
+
+                                </div>
+                                <div class="col-lg-4">
                                     <form action="/dashboard/orders/{{{$order->order_id}}}" method="POST">
                                         @method('DELETE')
                                         @csrf
@@ -97,11 +118,6 @@
                                         </button>
                                     </form>
 
-                                </div>
-                                <div class="col-lg-6">
-                                    <a href="/dashboard/orders/{{{$order->order_id}}}/" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
-                                        view
-                                    </a>
                                 </div>
                             </div>
 
@@ -117,4 +133,62 @@
         </div>
     </div>
 </div>
+
+<script>
+    // payment
+    var payButton = document.getElementById('btn-bayar');
+    $('.btn-bayar').click(function() {
+        var snap_token = $(this).find("input[name='snap_token']").val();
+        var orderid = $(this).find("input[name='order_id']").val();
+        var grossamount = $(this).find("input[name='gross_amount']").val();
+        window.snap.pay(snap_token, {
+            onSuccess: function(result) {
+                console.log(result);
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('order.success.payment') }}",
+                    data: {
+                        data: result,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    error: function(data, textStatus, errorThrown) {
+                        console.log(data);
+                    },
+                });
+            },
+            onPending: function(result) {
+                // console.log(orderid);
+                // console.log(result);
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ route('order.pending.payment') }}",
+                    data: {
+                        data: result,
+                        order_id: orderid,
+                        gross_amount: grossamount,
+                        _token: '{{csrf_token()}}'
+                    },
+                    success: function(data) {
+                        console.log(data);
+                    },
+                    error: function(data, textStatus, errorThrown) {
+                        console.log(data);
+                    },
+                });
+            },
+            onError: function(result) {
+                /* You may add your own implementation here */
+                alert("payment failed!");
+                console.log(result);
+            },
+            onClose: function() {
+                /* You may add your own implementation here */
+            }
+        });
+    })
+</script>
 @endsection

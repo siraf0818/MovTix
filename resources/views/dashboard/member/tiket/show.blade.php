@@ -8,30 +8,29 @@
                 <p class="title-movie mb-2">Movie : {{$tiket->movie}}</p>
                 <div class="row">
                     <div class="col-6 mt-4">
-                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Date</p>
-                        <p class="date-tiket m-0">{{$tiket->date}}</p>
+                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Order</p>
+                        <p class="date-tiket m-0">{{$tiket->order_id}}</p>
                     </div>
                     <div class="col-6 mt-4">
                         <p class="title-date m-0" style="color: rgb(209, 204, 204)">Seat</p>
                         <p class="date-tiket m-0">@foreach (App\Models\Seat::where('order_id', '=', $tiket->order_id)->get() as $seat)
-
                             {{ $seat->no_seat }}
                             @endforeach
                         </p>
                     </div>
                     <div class="col-6 mt-4">
-                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Order</p>
-                        <p class="date-tiket m-0">{{$tiket->order_id}}</p>
+                        <p class="title-date m-0" style="color: rgb(209, 204, 204)">Date&Time</p>
+                        <p class="date-tiket m-0">{{$tiket->date}}</p>
+                        <p class="date-tiket m-0">{{$tiket->time}}</p>
                     </div>
                     <div class="col-6 mt-4">
                         <p class="title-date m-0" style="color: rgb(209, 204, 204)">Addon</p>
                         <p class="date-tiket m-0">{{$tiket->addon}}</p>
-                        <p class="date-tiket m-0">{{$tiket->jml_addon}}</p>
                     </div>
                 </div>
                 <hr class="mt-5" style="border: 3px dashed white">
                 <div class="d-flex justify-content-center">
-                    {!! QrCode::size(230)->generate('VIPCostumer') !!}
+                    {!! QrCode::size(230)->generate($movie['trailerUrl']) !!}
                 </div>
             </div>
         </div>

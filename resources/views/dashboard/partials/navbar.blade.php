@@ -1,11 +1,11 @@
 <div class="navigation active">
     <ul>
         <li>
-            <a href="">
+            <a href="/">
                 <span class="icon">
-                    <img src="/img/logo.png" alt="" style="width: 40px; height: 40px;" class="rounded-circle">
+                    <img src="/img/logo.png" alt="" style="width: 40px; height: 40px;">
                 </span>
-                <span class="title mt-1">MovTix</span>
+                <span class="title1 mt-1">MovTix</span>
             </a>
         </li>
         @foreach ($listnav as $navtitle)

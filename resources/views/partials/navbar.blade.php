@@ -32,10 +32,10 @@
       </ul>
 
       <form action="/search" class="d-flex" method="get">
-        <input id="searchnav" class="keyword form-control me-2" type="text" placeholder="search movie" name="keyword" aria-label="Search" size="30" autocomplete="off">
+        <input id="searchnav" class="keyword form-control me-2" type="text" placeholder="Search movie.." name="keyword" aria-label="Search" size="30" autocomplete="off">
         <button class="tombol-cari btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
       </form>
-      
+
       <ul class="navbar-nav me-auto mb-2 mb-lg-0 ml-lg-50">
         @auth
         <li class="nav-item dropdown">

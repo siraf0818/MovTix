@@ -52,6 +52,21 @@ class Dashboard extends Model
                 'link' => '/dashboard/customers'
             ],
             [
+                'title' => 'Theater',
+                'icon' => 'film-outline',
+                'link' => '/dashboard/theater'
+            ],
+            [
+                'title' => 'Penayangan',
+                'icon' => 'film-outline',
+                'link' => '/dashboard/penayangan'
+            ],
+            [
+                'title' => 'Addons',
+                'icon' => 'fish-outline',
+                'link' => '/dashboard/addon'
+            ],
+            [
                 'title' => 'Orders',
                 'icon' => 'bag-check-outline',
                 'link' => '/dashboard/orders'
@@ -62,8 +77,8 @@ class Dashboard extends Model
                 'link' => '/dashboard/sales'
             ],
             [
-                'title' => 'Setting',
-                'icon' => 'settings-outline',
+                'title' => 'Profile',
+                'icon' => 'person-outline',
                 'link' => '/dashboard/setting'
             ],
             [
@@ -74,7 +89,7 @@ class Dashboard extends Model
             ],
             [
                 'title' => 'Sign Out',
-                'icon' => 'log-out',
+                'icon' => 'log-out-outline',
                 'link' => '/logout'
             ],
         ];
@@ -91,7 +106,7 @@ class Dashboard extends Model
             ],
             [
                 'title' => 'Orders',
-                'icon' => 'chatbubble-outline',
+                'icon' => 'bag-check-outline',
                 'link' => '/dashboard/member/orders'
             ],
             [
@@ -100,8 +115,8 @@ class Dashboard extends Model
                 'link' => '/dashboard/member/tiket'
             ],
             [
-                'title' => 'Setting',
-                'icon' => 'settings-outline',
+                'title' => 'Profile',
+                'icon' => 'person-outline',
                 'link' => '/dashboard/member/setting'
             ],
             [
@@ -112,7 +127,7 @@ class Dashboard extends Model
             ],
             [
                 'title' => 'Sign Out',
-                'icon' => 'log-out',
+                'icon' => 'log-out-outline',
                 'link' => '/logout'
             ],
         ];

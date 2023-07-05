@@ -31,7 +31,7 @@
                 <div class="row" style="cursor: pointer !important">
                     <div class="col-8">
                         <h2 class="number-stats">{{count($users)}}</h2>
-                        <div class="name-stats">Users</div>
+                        <div class="name-stats">Customers</div>
                     </div>
                     <div class="col-4 icon-stats">
                         <ion-icon name="people-outline"></ion-icon>

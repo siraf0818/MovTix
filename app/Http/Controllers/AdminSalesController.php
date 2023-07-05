@@ -65,8 +65,8 @@ class AdminSalesController extends Controller
         $auth = auth()->user();
         $details = Dashboard::getRecentOrder()->where('order_id', '=', $id)->first();
 
-        $ppn = ($details->total_price / 100) * 11;
-        $price = floor($details->total_price - $ppn);
+        $ppn = (($details->tiket_price + $details->addon_price) / 100) * 11;
+        $price = floor($details->tiket_price + $details->addon_price);
 
         return view('dashboard.admin.sales.show', [
             'title' => 'Details Order',

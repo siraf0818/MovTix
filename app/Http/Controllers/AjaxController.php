@@ -6,6 +6,9 @@ use App\Models\Dashboard;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\User;
+use App\Models\Penayangan;
+use App\Models\Addon;
+use App\Models\Theater;
 
 class AjaxController extends Controller
 {
@@ -36,6 +39,21 @@ class AjaxController extends Controller
                 }
             });
             return $orders;
+        } elseif ($request->url == '/dashboard/addon') {
+            $addon = Addon::all()->filter(function ($item) use ($title) {
+                return false !== stristr($item['name'], $title) || false !== stristr($item['description'], $title) || false !== stristr($item['price'], $title);
+            });
+            return $addon;
+        } elseif ($request->url == '/dashboard/penayangan') {
+            $penayangan = Penayangan::all()->filter(function ($item) use ($title) {
+                return false !== stristr($item['id'], $title) || false !== stristr($item['theater'], $title) || false !== stristr($item['date'], $title) || false !== stristr($item['time'], $title) ||  false !== stristr($item['movie'], $title) || false !== stristr($item['tiket_price'], $title);
+            });
+            return $penayangan;
+        } elseif ($request->url == '/dashboard/theater') {
+            $theater = Theater::all()->filter(function ($item) use ($title) {
+                return false !== stristr($item['code'], $title) || false !== stristr($item['name'], $title) || false !== stristr($item['status'], $title);
+            });
+            return $theater;
         }
     }
 }

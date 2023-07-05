@@ -77,7 +77,7 @@
             </div>
 
             <div class="d-flex justify-content-end my-2">
-                <button class="btn px-4" style="background: #E9ECEF;">Save </button>
+                <button class="btn badge-save px-4" style="color: #ffffff; background: #52527a;">Save </button>
             </div>
 
         </form>

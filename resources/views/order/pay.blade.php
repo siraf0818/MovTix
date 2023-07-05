@@ -21,11 +21,11 @@
 
                         <div class="location">
                             <span><i class="bi bi-geo-alt"></i></span>
-                            <span class="mx-1">{{$order->city}}, {{$order->theater}}</span>
+                            <span class="mx-1">{{$order->theater}}</span>
                         </div>
                         <div class="total-tiket">
                             <span><i class="bi bi-ticket-detailed"></i></span>
-                            <span class="mx-1">{{$order->jml_tiket}} Tiket, [ @foreach ($seat as $seats) {{$seats->no_seat}} ]
+                            <span class="mx-1">{{$order->jml_tiket}} Tiket, @foreach ($seat as $seats) [ {{$seats->no_seat}} ]
                                 @endforeach</span>
                         </div>
                         <div class="date">
@@ -46,18 +46,37 @@
                 <div class="row">
                     <div class="col-9">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="tiket-movie" value="" id="tiket-movie" checked>
+                            <input class="form-check-input invisible" type="checkbox" name="tiket-movie" value="" id="tiket-movie" checked>
                             <label class="form-check-label" style="font-size: 0.9rem" for="tiket-movie">
                                 <span class="label-tiket">{{$order->movie}}</span> | <span class="jml-tiket">{{$order->jml_tiket}}</span>
                             </label>
                         </div>
                     </div>
-                    <div class="col price-t">
-                        <p>{{number_format($order->total_price, 0, '.', '.');}}</p>
+                    <div class="col-3 price-t">
+                        <p>{{number_format($order->tiket_price, 0, '.', '.');}}</p>
+                    </div>
+                    <div class="col-9">
+                        <div class="form-check">
+                            <input class="form-check-input invisible" type="checkbox" name="tiket-movie" value="" id="tiket-movie" checked>
+                            <label class="form-check-label" style="font-size: 0.9rem" for="tiket-movie">
+                                <span class="label-tiket">{{$order->addon}}</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-3 price-t">
+                        <p>{{number_format($order->addon_price, 0, '.', '.');}}</p>
                     </div>
                 </div>
                 <hr class="my-1">
-                <div class="row mt-2">
+                <div class="row mt-3">
+                    <div class="col-9">
+                        <p>PPN 11%</p>
+                    </div>
+                    <div class="col">
+                        <p class="price-total">{{number_format($ppn, 0, '.', '.');}}</p>
+                    </div>
+                </div>
+                <div class="row my-0">
                     <div class="col-9">
                         <p>Total</p>
                     </div>
