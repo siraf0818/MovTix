@@ -1,9 +1,9 @@
 @extends('dashboard.layouts.main')
 @section('container')
 <div class="details row px-4 gap-3 position-relative">
-    <div class="recentCustomer col p-3 ">
+    <div class="recentCustomer col p-3">
         <div class="cardHeader d-flex justify-content-between">
-            <h5>Create addon</h5>
+            <h5>Create AddOn</h5>
         </div>
         <div class="card-body">
             @if($errors->any())
@@ -65,7 +65,7 @@
 <div class="details row px-4 gap-3 position-relative">
     <div class="recentCustomer col p-3">
         <div class="cardHeader d-flex justify-content-between">
-            <h5>Manage addon</h5>
+            <h5>Manage AddOn</h5>
             <div class="search" style="width: 200px; height: 40px; padding-bottom: 8px;">
                 <label for="" style="height: 100%;">
                     <input style="height: 100%" id="searchval" type="text" placeholder="Search..">
