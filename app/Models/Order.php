@@ -13,6 +13,12 @@ class Order extends Model
     public $incrementing = false;
     protected $guarded = [];
 
+    public static function validate($request)
+    {
+        $request->validate([
+            'seat' => 'required||unique:orders,seat_id',
+        ]);
+    }
 
     public function seat()
     {

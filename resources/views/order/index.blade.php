@@ -4,6 +4,11 @@
 <div class="p-4 ordersmovie" style="min-height: 100vh">
     <div class="order row py-3 px-1 rounded">
         <div class="col-lg-8">
+            @if(session()->has('errors'))
+            <ul class="alert alert-danger list-unstyled">
+                <li>{{ session('errors') }}</li>
+            </ul>
+            @endif
             <form action="/pay" method="POST" id="form-bayar">
                 @csrf
                 <h4>Movie</h4>
@@ -12,7 +17,7 @@
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-film"></i></span>
                     </label>
                     <input type="search" id="movie" class="form-control" hint="off" autocomplete="off" name="movie" placeholder="Cari film..." required />
-                    <div class="dropdown mt-2 invisible w-100">
+                    <div id="dropmov" class="dropdown mt-2 invisible w-100">
                         <ul id="list-movie" class="p-2 w-100 bg-white rounded text-black list-unstyled position-absolute">
                             @foreach ($posts as $p)
                             <li id="{{$p["id"]}}" class='opt-movie'><img src="{{$p["bannerUrl"]}}" alt='' width='30px' class='mr-3'><span class='my-auto'>{{$p["title"]}}</span></li>
@@ -135,15 +140,17 @@
                 <div class="row" id="addonb">
                     <div id="addonbs" class="col-lg-10 col-12">
                         <div class="input-group mb-3">
-                            <label for="addon" class="input-group-prepend">
+                            <label for="addons" class="input-group-prepend">
                                 <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span>
                             </label>
-                            <select id="baddon" autocomplete="off" name="addon[]" class="form-select" aria-label="Default select example">
-                                <option adnp="00.00" selected>-</option>
-                                @foreach ($viewData["addon"] as $addon)
-                                <option adnp="{{ $addon->getPrice() }}">{{ $addon->getName() }}</option>
-                                @endforeach
-                            </select>
+                            <input type="search" id="addons" class="form-control" hint="off" autocomplete="off" name="addon[]" placeholder="Cari addon..." />
+                            <div id="dropadn" class="dropdown mt-2 invisible w-100">
+                                <ul id="list-addon" class="p-2 w-100 bg-white rounded text-black list-unstyled position-absolute fixed-top">
+                                    @foreach ($viewData["addon"] as $addon)
+                                    <li id="{{$addon->getId()}}" class='opt-addon'><img src="{{asset('/storage/'.$addon->getImage())}}" alt='' width='30px' class='mr-3'><span adnp="{{ $addon->getPrice() }}" class='my-auto'>{{$addon->getName()}}</span></li>
+                                    @endforeach
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div id="1addonbs" class="col mt-2">
@@ -258,10 +265,20 @@
         return parts.join(",");
     }
 
-    function addonprice(id) {
-        var option = $(`#addonbs${id}`).find('option:selected');
-        var adnprc = option.attr("adnp");
-        var text = option.text();
+    function addonshow(id) {
+        $('.dropdown').addClass('invisible');
+        var value = $(`#addonbs${id}`).val().toLowerCase();
+        $(`#list-addon${id} li`).filter(function() {
+            $(`#list-addon${id} li`).toggle($(`#addonbs${id}`).find('span').text().toLowerCase().indexOf(value) > -1)
+        })
+        $(`#dropadn${id}`).removeClass("invisible");
+        event.stopPropagation();
+    }
+
+    function addonprice(id, ids) {
+        var adnprc = $(`.opt-addon${ids}`).find('span').attr("adnp");
+        var text = $(`.opt-addon${ids}`).find('span').text();
+        $(`#addonbs${id}`).val(text)
         var prices = $(`.price-a`);
         var price = $(`#price p`);
         var jml_tiket = $('#jml_tiket');
@@ -269,7 +286,7 @@
         var pricea = $(`#pricea${id} p`);
         var jml_addon = $(`#jml_addon${id}`);
         var valuea = parseInt(jml_addon.val())
-        var textAddon = $(`#addonbs${id}`).find('option:selected').text();
+        var textAddon = $(`.opt-addon${ids}`).find('span').text();
         $(`.label-addon${id}`).text(textAddon);
 
         var textPrice = price.text().split('.').join('');
@@ -358,12 +375,15 @@
     }
 
     $(document).ready(function() {
+        $(document).click(function() {
+            $('.dropdown').addClass('invisible');
+        });
         $(document).on("click", ".opt-movie", function() {
             var seat = $('.show-seat span')
             seat.removeClass("invisible");
             var price = $("#price p");
             var textMovie = $(this).find('span').text();
-            $('#movie').val($(this).find('span').text())
+            $('#movie').val(textMovie)
             $(".label-tiket").text(textMovie);
             var movie = $(this).attr('id')
             $('input[name=id_movie]').val(movie)
@@ -584,18 +604,30 @@
             $('input[name=tiket_price]').val((parseFloat(textPrice)))
         })
 
-        $("#movie").bind("keypress click", function() {
+        $("#movie").bind("keypress click", function(event) {
+            $('.dropdown').addClass('invisible');
             var value = $(this).val().toLowerCase();
             $('#list-movie li').filter(function() {
                 $(this).toggle($(this).find('span').text().toLowerCase().indexOf(value) > -1)
             })
-            $('.dropdown').removeClass("invisible");
+            $('#dropmov').removeClass("invisible");
+            event.stopPropagation();
         });
 
-        $('#baddon').change(function() {
-            var option = $(this).find('option:selected');
-            var adnprc = option.attr("adnp");
-            var text = option.text();
+        $("#addons").bind("keypress click", function() {
+            $('.dropdown').addClass('invisible');
+            var value = $(this).val().toLowerCase();
+            $('#list-addon li').filter(function() {
+                $(this).toggle($(this).find('span').text().toLowerCase().indexOf(value) > -1)
+            })
+            $('#dropadn').removeClass("invisible");
+            event.stopPropagation();
+        });
+
+        $(document).on("click", ".opt-addon", function() {
+            var adnprc = $(this).find('span').attr("adnp");
+            var text = $(this).find('span').text();
+            $('#addons').val(text)
             var prices = $(`.price-a`);
             var price = $("#price p");
             var jml_tiket = $('#jml_tiket');
@@ -603,7 +635,7 @@
             var pricea = $("#pricea p");
             var jml_addon = $('#jml_addon');
             var valuea = parseInt(jml_addon.val())
-            var textAddon = $(this).find('option:selected').text();
+            var textAddon = text;
             $(".label-addon").text(textAddon);
 
             var textPrice = price.text().split('.').join('');
@@ -795,10 +827,13 @@
             valueb++;
             banyak_addon.val(valueb);
             $(".banyak_addon").text(valueb);
-            $('#addonb').append(`<div id="addonbss${valueb}" class="col-lg-10 col-12"><div class="input-group mb-3"><label for="addon${valueb}" class="input-group-prepend"><span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span></label><select id="addonbs${valueb}" onchange="addonprice(${valueb})" autocomplete="off" name="addon[]" class="form-select" aria-label="Default select example">    <option adnp="00.00" selected>-</option>
-                                @foreach ($viewData["addon"] as $addon)
-                                <option adnp="{{ $addon->getPrice() }}">{{ $addon->getName() }}</option>
-                                @endforeach</select></div></div><div id="1addonbs${valueb}" class="col mt-2"><div class="row"> <div class="col-2"> <span class="rounded"><i class="bi bi-cash-coin"></i></span> </div> <div id="pricea${valueb}" class="col"> <p>00.00</p> </div></div></div><div id="2addonbs${valueb}" class="col-6 col-lg-12 mb-3 tiket"><span id="kuranga${valueb}" onClick="kurangadn(${valueb})" class="rounded"> <i class="bi bi-dash-circle"></i> </span><input type="text" id="jml_addon${valueb}" autocomplete="off" name="jml_addon[]" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly"> <span id="tambaha${valueb}"  onClick="tambahadn(${valueb})" class="rounded"><i class="bi bi-plus-circle"></i> </span></div></div>`);
+            $('#addonb').append(`<div id="addonbss${valueb}" class="col-lg-10 col-12"><div class="input-group mb-3"><label for="addonbs${valueb}" class="input-group-prepend"><span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span></label><input id="addonbs${valueb}" type="search" onkeypress="addonshow(${valueb})" onclick="addonshow(${valueb})" class="form-control" hint="off" autocomplete="off" name="addon[]" placeholder="Cari addon..." /><div id="dropadn${valueb}" class="dropdown mt-2 invisible w-100">
+                                <ul id="list-addon${valueb}" class="fixed-top p-2 w-100 bg-white rounded text-black list-unstyled position-absolute">
+                                    @foreach ($viewData["addon"] as $addon)
+                                    <li id="{{$addon->getId()}}" onclick="addonprice(${valueb},${valueb}{{$addon->getId()}})" class='opt-addon${valueb}{{$addon->getId()}}'><img src="{{asset('/storage/'.$addon->getImage())}}" alt='' width='30px' class='mr-3'><span adnp="{{ $addon->getPrice() }}" class='my-auto'>{{$addon->getName()}}</span></li>
+                                    @endforeach
+                                </ul>
+                            </div></div></div><div id="1addonbs${valueb}" class="col mt-2"><div class="row"> <div class="col-2"> <span class="rounded"><i class="bi bi-cash-coin"></i></span> </div> <div id="pricea${valueb}" class="col"> <p>00.00</p> </div></div></div><div id="2addonbs${valueb}" class="col-6 col-lg-12 mb-3 tiket"><span id="kuranga${valueb}" onClick="kurangadn(${valueb})" class="rounded"> <i class="bi bi-dash-circle"></i> </span><input type="text" id="jml_addon${valueb}" autocomplete="off" name="jml_addon[]" style="width: 50px; text-align: center;" class="mx-3" value="0" readonly="readonly"> <span id="tambaha${valueb}"  onClick="tambahadn(${valueb})" class="rounded"><i class="bi bi-plus-circle"></i> </span></div></div>`);
             $('#addonbyr').append(`<div class="col-9" id="1addonbyr${valueb}">
                         <div class="form-check">
                             <input class="form-check-input invisible" type="checkbox" name="addon" value="" id="addon${valueb}" checked>
@@ -818,7 +853,6 @@
                 seat.append("<input type='text' class='text-white' name='seat[]' style='width: 30px; background-color:transparent; border: none;' value='" + $(this).text() + "' readonly='readonly'>")
             } else if (0 < value && value == lengtseat) {
                 seat.children('input').last().val($(this).text());
-                // $(this).addClass("invisible");
             }
         })
 
