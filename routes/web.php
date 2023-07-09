@@ -88,7 +88,6 @@ Route::middleware('auth')->group(function () {
         Route::post('order-ajax-theaters', 'theaters')->name('order.theaters');
         Route::post('order-ajax-times', 'times')->name('order.times');
         Route::post('order-ajax-prices', 'prices')->name('order.prices');
-        Route::post('order-ajax-ids', 'ids')->name('order.ids');
         Route::post('order-ajax-seats', 'seats')->name('order.seats');
     });
 

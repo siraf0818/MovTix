@@ -34,12 +34,6 @@ class OrderAjaxController extends Controller
         return $prices;
     }
 
-    public function ids(Request $request)
-    {
-        $ids = Penayangan::getIdDtl($request->movie_id, $request->date, $request->time, $request->theater);
-        return $ids;
-    }
-
     public function seats(Request $request)
     {
         $seats = Penayangan::getSeatDtl($request->penayangan_id);

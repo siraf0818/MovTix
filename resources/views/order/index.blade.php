@@ -27,7 +27,7 @@
                                 <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-calendar-event"></i></span>
                             </label>
                             <select id="date" name="date" class="form-select" aria-label="Default select example">
-                                <option selected>Tanggal</option>
+                                <option selected>Date</option>
                             </select>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                                 <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-alarm"></i></span>
                             </label>
                             <select id="time" name="time" class="form-select" aria-label="Default select example">
-                                <option selected>Jam</option>
+                                <option selected>Time</option>
                             </select>
                         </div>
                     </div>
@@ -359,6 +359,8 @@
 
     $(document).ready(function() {
         $(document).on("click", ".opt-movie", function() {
+            var seat = $('.show-seat span')
+            seat.removeClass("invisible");
             var price = $("#price p");
             var textMovie = $(this).find('span').text();
             $('#movie').val($(this).find('span').text())
@@ -378,7 +380,6 @@
                     _token: '{{csrf_token()}}'
                 },
                 success: function(data) {
-                    console.log(data);
                     $('#date').empty();
                     $('#date').append("<option>Date</option>")
                     $.each(data, function(index, value) {
@@ -408,9 +409,11 @@
             $('input[name=total_price]').val(totalBayar)
             $('input[name=addon_price]').val(parseFloat(textPricea))
             $('input[name=tiket_price]').val((parseFloat(textPrice)))
-        });
+        })
 
         $('#date').change(function() {
+            var seat = $('.show-seat span')
+            seat.removeClass("invisible");
             var price = $("#price p");
             var option = $(this).find('option:selected');
             var value = option.val();
@@ -457,9 +460,11 @@
             $('input[name=total_price]').val(totalBayar)
             $('input[name=addon_price]').val(parseFloat(textPricea))
             $('input[name=tiket_price]').val((parseFloat(textPrice)))
-        });
+        })
 
         $('#time').change(function() {
+            var seat = $('.show-seat span')
+            seat.removeClass("invisible");
             var price = $("#price p");
             var option = $(this).find('option:selected');
             var value = option.val();
@@ -479,9 +484,10 @@
                 },
                 success: function(data) {
                     $('#theater').empty();
-                    $('#theater').append("<option>Theater</option>")
+                    $('#theater').append("<option id='-' value='-'>Theater</option>")
+                    console.log(data);
                     $.each(data, function(index, value) {
-                        $('#theater').append("<option id=" + value + " value=" + value + ">" + value + "</option>");
+                        $('#theater').append("<option id=" + value.code + " value=" + value.code + ">" + value.name + "</option>");
                     })
                 },
                 error: function(data, textStatus, errorThrown) {
@@ -507,15 +513,19 @@
             $('input[name=total_price]').val(totalBayar)
             $('input[name=addon_price]').val(parseFloat(textPricea))
             $('input[name=tiket_price]').val((parseFloat(textPrice)))
-        });
+        })
 
         $('#theater').change(function() {
+            var seat = $('.show-seat span')
+            seat.removeClass("invisible");
             var option = $(this).find('option:selected');
             var theater_id = option.attr("id");
             var price = $("#price p");
             var time = $('select[name=time]').val();
             var date = $('select[name=date]').val();
             var id = $('input[name=id_movie]').val();
+            var penayangan_id = theater_id + date + time;
+            $('input[name=penayangan_id]').val(penayangan_id);
             $.ajax({
                 type: 'POST',
                 url: "{{route('order.prices')}}",
@@ -538,32 +548,13 @@
             })
             $.ajax({
                 type: 'POST',
-                url: "{{route('order.ids')}}",
-                data: {
-                    theater: theater_id,
-                    time: time,
-                    date: date,
-                    movie_id: id,
-                    _token: '{{csrf_token()}}'
-                },
-                success: function(data) {
-                    $.each(data, function(index, value) {
-                        $('input[name=penayangan_id]').val(data);
-                    })
-                },
-                error: function(data, textStatus, errorThrown) {
-                    console.log(data);
-                },
-            })
-            var penayangan_id = $('input[name=penayangan_id]').val();
-            $.ajax({
-                type: 'POST',
                 url: "{{route('order.seats')}}",
                 data: {
                     penayangan_id: penayangan_id,
                     _token: '{{csrf_token()}}'
                 },
                 success: function(data) {
+                    console.log(penayangan_id);
                     $.each(data, function(index, value) {
                         $('#' + value).addClass("invisible");
                         console.log('#' + value);
@@ -591,7 +582,7 @@
             $('input[name=total_price]').val(totalBayar)
             $('input[name=addon_price]').val(parseFloat(textPricea))
             $('input[name=tiket_price]').val((parseFloat(textPrice)))
-        });
+        })
 
         $("#movie").bind("keypress click", function() {
             var value = $(this).val().toLowerCase();
