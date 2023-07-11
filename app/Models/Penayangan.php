@@ -146,7 +146,7 @@ class Penayangan extends Model
     public static function getTheaterDtl($movie_id, $date, $time)
     {
         $viewData = [];
-        $viewData = Penayangan::select('theater')->where('id_movie', $movie_id)->where('date', $date)->where('time', $time)->distinct()->pluck('theater')->toArray();
+        $viewData = Penayangan::join('theaters', 'penayangans.theater', '=', 'theaters.code')->where('id_movie', $movie_id)->where('date', $date)->where('time', $time)->get(['theaters.code', 'theaters.name']);
         return $viewData;
     }
     public static function getPriceDtl($movie_id, $date, $time, $theater)

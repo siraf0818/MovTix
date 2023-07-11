@@ -52,6 +52,7 @@ class OrderController extends Controller
 
     public function insertData(Request $request)
     {
+        Order::validate($request);
         $request['user_id'] = auth()->user()->id;
         $faker = Faker::create('id_ID');
         $order_id = $faker->bothify('?????-#####');
@@ -69,9 +70,7 @@ class OrderController extends Controller
             'date' => 'required',
             'time' => 'required',
             'movie' => 'required',
-            'addon' => 'required',
             'seat' => 'required||unique:orders,seat_id',
-            'jml_addon' => 'required',
             'id_movie' => 'required',
             'jml_tiket' => 'required',
         ]);
@@ -82,10 +81,15 @@ class OrderController extends Controller
         $id = Order::find($order_id);
 
         $addono = [];
+
         foreach ($request->addon as $key => $value) {
-            $a = $request->addon[$key];
-            $j = $request->jml_addon[$key];
-            $addono[] = $a . '(' . $j . ')';
+            if ($request->addon[$key] == null) {
+                $addono = [];
+            } else {
+                $a = $request->addon[$key];
+                $j = $request->jml_addon[$key];
+                $addono[] = $a . '(' . $j . ')';
+            }
         }
 
         DB::beginTransaction();
@@ -130,7 +134,7 @@ class OrderController extends Controller
             return redirect('payment');
         } catch (\Exception $e) {
             DB::rollback();
-            return redirect('order')->with('warning', 'Something Went Wrong!');
+            return back()->with('errors', 'Duplicate Seat!');
         }
     }
 }
