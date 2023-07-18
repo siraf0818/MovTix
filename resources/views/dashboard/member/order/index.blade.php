@@ -89,12 +89,12 @@
                         </td>
                         <td>
                             <div class="row w-100">
-                                <div class="col-6">
+                                <div class="col-4">
                                     <a href="/dashboard/member/orders/{{$order->order_id}}" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
                                         views
                                     </a>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-4">
 
                                     <a href="#" class="badge btn-bayar badge-edit  text-white bg-secondary rounded-pill d-inline">
                                         pay
@@ -108,13 +108,21 @@
                                     </a>
 
                                 </div>
+                                <div class="col-lg-4">
+                                    <form action="/dashboard/member/orders/{{{$order->order_id}}}" method="POST">
+                                        @method('DELETE')
+                                        @csrf
+                                        <button type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
+                                            delete
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-
             <div class="d-flex mt-2 justify-content-end">
                 {!! $orders->links() !!}
             </div>

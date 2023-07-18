@@ -82,8 +82,8 @@
                             @endif
 
                             @else
-                            <span class="badge bg-info rounded-pill d-inline">
-                                inProgres
+                            <span class="badge bg-danger rounded-pill d-inline">
+                                expired
                             </span>
                             @endif
                         </td>
@@ -118,7 +118,7 @@
                                         </button>
                                     </form>
                                 </div>
-                                
+
                             </div>
 
                         </td>

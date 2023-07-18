@@ -37,7 +37,7 @@
                     <span class="mx-2">|</span>
 
                     <span>
-                        <a class="trailer bg-gray text-decoration-none" href="{{ $movie['trailerUrl'] }}">
+                        <a class="trailer bg-gray text-decoration-none" href="{{ $movie['trailerUrl'] }}" target="_blank">
                             Play Trailer
                         </a>
                     </span>
@@ -49,10 +49,7 @@
                     {{ $movie['description'] }}
                 </div>
             </div>
-
             <hr class="my-3">
-
-
             <div class="col-lg-6 mb-2">
                 <div class="cast">
                     <h5>Cast</h5>
@@ -64,8 +61,6 @@
                     @endforeach
                 </div>
             </div>
-
-
             <div class="col-lg-6 mb-2">
                 <div class="producer">
                     <h5>Producer</h5>
@@ -77,8 +72,6 @@
                     @endforeach
                 </div>
             </div>
-
-
             <div class="col-lg-6 my-2">
                 <div class="writer">
                     <h5>Writer</h5>
@@ -90,8 +83,6 @@
                     @endforeach
                 </div>
             </div>
-
-
             <div class="col-lg-6 my-2">
                 <div class="director">
                     <h5>Director</h5>

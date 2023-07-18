@@ -1,6 +1,5 @@
 @extends('dashboard.layouts.main')
 @section('container')
-<<<<<<< HEAD
 <div class="details row px-4 gap-3 position-relative">
     <div class="recentCustomer col p-3 ">
         <div class="cardHeader d-flex justify-content-between">
@@ -29,71 +28,6 @@
                                 <option selected>Pilih Theater</option>
                                 @foreach ($viewData["theater"] as $theater)
                                 <option value="{{ $theater->getId() }}">{{ $theater->getName() }}</option>
-=======
-<div class="card mb-4">
-    <div class="card-header">
-        Create Penayangan
-    </div>
-    <div class="card-body">
-        @if($errors->any())
-        <ul class="alert alert-danger list-unstyled">
-            @foreach($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-        @endif
-        <form method="POST" action="{{ route('dashboard.admin.penayangan.store') }}" enctype="multipart/form-data">
-            @csrf
-            <input name="id" value="" type="text" class="form-control mb-3" hidden>
-            <input id="id" value="" type="text" class="form-control mb-3" disabled>
-            <input name="id_movie" value="" type="text" class="form-control mb-3" hidden>
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3">
-                        <label for="theater" class="input-group-prepend">
-                            <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-geo-alt"></i></span>
-                        </label>
-                        <select id="theater" name="theater" class="form-select" aria-label="Default select example">
-                            <option selected>Pilih Theater</option>
-                            @foreach ($viewData["theater"] as $theater)
-                            <option value="{{ $theater->getId() }}">{{ $theater->getName() }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="row">
-                        <div class="col">
-                            <div class="input-group mb-3">
-                                <label for="date" class="input-group-prepend">
-                                    <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-geo-alt"></i></span>
-                                </label>
-                                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="date" />
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="input-group mb-3">
-                                <label for="time" class="input-group-prepend">
-                                    <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-geo-alt"></i></span>
-                                </label>
-                                <input class="form-control" id="time" name="time" placeholder="Time" type="time" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="input-group mb-3 position-relative" style="z-index: 100">
-                        <label for="movie" class="input-group-prepend">
-                            <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-film"></i></span>
-                        </label>
-                        <input type="search" id="movie" class="form-control" hint="off" autocomplete="off" name="movie" placeholder="Cari film..." required />
-                        <div class="dropdown mt-2 invisible w-100">
-                            <ul id="list-movie" class="p-2 w-100 bg-white rounded text-black list-unstyled position-absolute">
-                                @foreach ($posts as $p)
-                                <li id="{{$p["id"]}}" class='opt-movie'><img src="{{$p["bannerUrl"]}}" alt='' width='30px' class='mr-3'><span class='my-auto'>{{$p["title"]}}</span></li>
->>>>>>> c087d85da0b364bdf061c116771995f6a7493a21
                                 @endforeach
                             </select>
                         </div>
@@ -154,7 +88,7 @@
 <div class="details row px-4 gap-3 position-relative">
     <div class="recentCustomer col p-3">
         <div class="cardHeader d-flex justify-content-between">
-            <h5>Manage Penayangan</h5> 
+            <h5>Manage Penayangan</h5>
             <div class="search" style="width: 200px; height: 40px; padding-bottom: 8px;">
                 <label for="" style="height: 100%;">
                     <input style="height: 100%" id="searchval" type="text" placeholder="Search..">
