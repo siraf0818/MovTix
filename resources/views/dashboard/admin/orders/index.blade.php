@@ -82,13 +82,14 @@
                             @endif
 
                             @else
-                            <span class="badge bg-info rounded-pill d-inline">
-                                inProgres
+                            <span class="badge bg-danger rounded-pill d-inline">
+                                expired
                             </span>
                             @endif
                         </td>
                         <td>
                             <div class="row w-100">
+
                                 <div class="col-lg-4">
                                     <a href="/dashboard/orders/{{{$order->order_id}}}/" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
                                         view
@@ -96,7 +97,6 @@
                                 </div>
 
                                 <div class="col-4">
-
                                     <a href="#" class="badge btn-bayar badge-edit  text-white bg-secondary rounded-pill d-inline">
                                         pay
 
@@ -107,8 +107,8 @@
                                         <input type="hidden" name="order_id" value="{{$order->order_id}}">
                                         <input type="hidden" name="gross_amount" value="{{$order->total_price}}">
                                     </a>
-
                                 </div>
+
                                 <div class="col-lg-4">
                                     <form action="/dashboard/orders/{{{$order->order_id}}}" method="POST">
                                         @method('DELETE')
@@ -117,8 +117,8 @@
                                             delete
                                         </button>
                                     </form>
-
                                 </div>
+
                             </div>
 
                         </td>

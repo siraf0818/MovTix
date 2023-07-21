@@ -105,6 +105,8 @@ class MemberOrders extends Controller
      */
     public function destroy($id)
     {
-        //
+        $order = Order::where('order_id', '=', $id)->first();
+        Order::destroy($order->order_id);
+        return back()->with('messege', 'Order has been deleted!');
     }
 }
