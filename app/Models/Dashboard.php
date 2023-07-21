@@ -58,12 +58,12 @@ class Dashboard extends Model
             ],
             [
                 'title' => 'Penayangan',
-                'icon' => 'film-outline',
+                'icon' => 'ticket-outline',
                 'link' => '/dashboard/penayangan'
             ],
             [
                 'title' => 'Addons',
-                'icon' => 'fish-outline',
+                'icon' => 'bag-add-outline',
                 'link' => '/dashboard/addon'
             ],
             [
@@ -73,7 +73,7 @@ class Dashboard extends Model
             ],
             [
                 'title' => 'Sales',
-                'icon' => 'cart-outline',
+                'icon' => 'bar-chart-outline',
                 'link' => '/dashboard/sales'
             ],
             [
