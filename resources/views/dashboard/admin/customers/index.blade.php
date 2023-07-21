@@ -58,7 +58,7 @@
                                         @method('DELETE')
                                         @csrf
                                         <a type="submit" onclick="return confirm('Are you sure want to delete user?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
-                                            Delete
+                                            delete
                                         </a>
                                     </form>
 
