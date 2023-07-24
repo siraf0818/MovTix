@@ -15,6 +15,12 @@ class Dashboard extends Model
         return $orders;
     }
 
+    public static function getRecentTik()
+    {
+        $orders = Order::with('user', 'payment')->join('theaters', 'theaters.id', '=', 'orders.theater')->get();
+        return $orders;
+    }
+
     public static function getSales()
     {
         $settlement = 'settlement';

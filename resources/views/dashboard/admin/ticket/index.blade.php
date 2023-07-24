@@ -6,6 +6,7 @@
         <div class="detail-tiket">
             <div class="p-4">
                 <p class="title-movie mb-2">Movie : {{$tiket->movie}}</p>
+                <p class="title-movie mb-2">Theater : {{$tiket->name}}</p>
                 <div class="row">
                     <div class="col-6 mt-4">
                         <p class="title-date m-0" style="color: rgb(209, 204, 204)">Order</p>
@@ -49,7 +50,7 @@
 
                     <div class="col-lg-12">
                         <div class="genre">
-                            <span class="bg-grey">Genre</span>
+                            <span class="fw-bold">Genre:</span>
 
                             @foreach ($movie['genre'] as $genre)
                             {{ $genre }}

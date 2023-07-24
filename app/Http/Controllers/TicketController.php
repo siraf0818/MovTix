@@ -14,7 +14,7 @@ class TicketController extends Controller
     public function index($id)
     {
         $auth = auth()->user();
-        $orders = Dashboard::getRecentOrder();
+        $orders = Dashboard::getRecentTik();
         $tiket = $orders->where('order_id', '=', $id)->first();
 
         $movie = Movie::getDetails($tiket->id_movie);

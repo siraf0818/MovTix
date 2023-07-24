@@ -13,7 +13,7 @@
                         <div class="name-stats">Orders</div>
                     </div>
                     <div class="col-4 icon-stats">
-                        <ion-icon name="chatbubble-outline"></ion-icon>
+                        <ion-icon name="bag-check-outline"></ion-icon>
                     </div>
                 </div>
             </a>
@@ -135,7 +135,7 @@
                                 <img src="{{App\Models\Movie::getDetails($ticket->id_movie)['bannerUrl'] }}" alt="" style="width: 45px; height: 45px;" class="rounded-circle">
                                 <div class="ms-3">
                                     <p class="fw-bold mb-1">{{$ticket->movie}}</p>
-                                    <p class="text-muted mb-0">#{{$ticket->order_id}}</p>
+                                    <p class="text-muted mb-0">{{$ticket->date}} {{$ticket->time}}</p>
                                 </div>
                             </div>
                         </td>
