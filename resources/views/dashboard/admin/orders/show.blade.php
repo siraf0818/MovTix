@@ -26,7 +26,7 @@
                 <p class="fw-bolder mb-0">Invoice Number</p>
                 <p class="fw-normal mb-0">{{$detail->order_id}}</p>
                 <p class="fw-normal mb-0">Issued Date: <span class="fw-bolder">{{$detail->created_at->format('d M, Y')}}</span></p>
-                <p class="fw-normal mb-0">Due Date: <span class="fw-bolder">{{date('d M, Y', strtotime("+1 day", strtotime($detail->created_at)))}}</span></p>
+                <p class="fw-normal mb-0">Due Date: <span class="fw-bolder">{{$detail->created_at->format('d M, Y')}}</span></p>
             </div>
             <div class="col-lg-4 col-12 p-3">
                 <p class="fw-bolder mb-0">Billed to</p>

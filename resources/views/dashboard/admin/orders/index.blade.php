@@ -63,6 +63,10 @@
                             <span class="badge bg-success rounded-pill d-inline">
                                 {{$order->payment->transaction_status}}
                             </span>
+                            @elseif($order->payment->transaction_status == "capture")
+                            <span class="badge bg-success rounded-pill d-inline">
+                                {{$order->payment->transaction_status}}
+                            </span>
                             @elseif($order->payment->transaction_status == "pending")
                             <span class="badge bg-warning rounded-pill d-inline">
                                 {{$order->payment->transaction_status}}
@@ -71,7 +75,7 @@
                             <span class="badge bg-primary rounded-pill d-inline">
                                 {{$order->payment->transaction_status}}
                             </span>
-                            @elseif($order->payment->transaction_status == "cencel")
+                            @elseif($order->payment->transaction_status == "cancel")
                             <span class="badge bg-danger rounded-pill d-inline">
                                 {{$order->payment->transaction_status}}
                             </span>
@@ -82,8 +86,8 @@
                             @endif
 
                             @else
-                            <span class="badge bg-danger rounded-pill d-inline">
-                                expired
+                            <span class="badge bg-info rounded-pill d-inline">
+                                inProgres
                             </span>
                             @endif
                         </td>
