@@ -20,7 +20,6 @@
             </div>
             <p class="text-muted mb-0 col mt-2">Polines</p>
         </div>
-
         <div class="d-flex row invoice mt-3 mx-1 justify-content-between purple-gradient color-block z-depth-1">
             <div class="col-lg-4 col-12 p-3">
                 <p class="fw-bolder mb-0">Invoice Number</p>
@@ -33,7 +32,6 @@
                 <p class="fw-normal mb-0">{{$detail->user->name}}</p>
                 <p class="fw-normal mb-0">{{$detail->user->address}}</p>
             </div>
-
         </div>
         <div class="item-detail mt-3">
             <p class="fw-bold mb-0">Item Detail</p>
@@ -44,6 +42,7 @@
                             <th>Invoice</th>
                             <th>Date Time</th>
                             <th>Movie</th>
+                            <th>Seats</th>
                             <th>Tickets</th>
                             <th>Addons</th>
                         </tr>
@@ -61,7 +60,14 @@
                                 <p class="fw-normal mb-1">{{$detail->movie}}</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">{{$detail->jml_tiket}} Tickets</p>
+                                <p class="fw-normal mb-1">@foreach (App\Models\Seat::where('order_id', '=', $detail->order_id)->get() as $seat)
+                                    [{{ $seat->no_seat }}]
+                                    @endforeach
+                                </p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">{{$detail->jml_tiket}} Tickets
+                                </p>
                                 <p class="fw-normal mb-1">Total: Rp.{{$detail->tiket_price}}</p>
                             </td>
                             <td>

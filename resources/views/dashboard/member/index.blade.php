@@ -79,6 +79,10 @@
                             <span class="badge bg-success rounded-pill d-inline">
                                 {{$order->payment->transaction_status}}
                             </span>
+                            @elseif($order->payment->transaction_status == "capture")
+                            <span class="badge bg-success rounded-pill d-inline">
+                                {{$order->payment->transaction_status}}
+                            </span>
                             @elseif($order->payment->transaction_status == "pending")
                             <span class="badge bg-warning rounded-pill d-inline">
                                 {{$order->payment->transaction_status}}

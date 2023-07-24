@@ -27,7 +27,6 @@
                         <th>Name</th>
                         <th>Invoice</th>
                         <th>Movie</th>
-                        <th>Addon</th>
                         <th>Price</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -50,9 +49,7 @@
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{$order->movie}}</p>
-                        </td>
-                        <td>
-                            <p class="fw-normal mb-1">{{$order->addon}}</p>
+                            <p class="text-muted mb-0">{{$order->date}} {{$order->time}}</p>
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{number_format($order->total_price, 0, '.', '.');}}</p>
@@ -99,8 +96,7 @@
                                         view
                                     </a>
                                 </div>
-
-                                <div class="col-4">
+                                <div class="col-lg-4">
                                     <a href="#" class="badge btn-bayar badge-edit  text-white bg-secondary rounded-pill d-inline">
                                         pay
 
@@ -112,14 +108,13 @@
                                         <input type="hidden" name="gross_amount" value="{{$order->total_price}}">
                                     </a>
                                 </div>
-
                                 <div class="col-lg-4">
                                     <form action="/dashboard/orders/{{{$order->order_id}}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <a type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
+                                        <button type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
                                             delete
-                                        </a>
+                                        </button>
                                     </form>
                                 </div>
 

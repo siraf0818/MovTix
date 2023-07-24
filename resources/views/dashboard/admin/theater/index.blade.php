@@ -92,14 +92,14 @@
                         </td>
                         <td>
                             <div class="row w-50">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <!-- edit -->
                                     <a class="badge badge-edit text-white bg-primary rounded-pill d-inline" href="{{route('dashboard.admin.theater.edit', ['id'=> $theater->getId()])}}">
                                         edit
                                     </a>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <!-- delete -->
                                     <form action="{{ route('dashboard.admin.theater.delete', $theater->getId())}}" method="POST">
                                         @csrf

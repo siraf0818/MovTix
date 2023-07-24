@@ -87,33 +87,36 @@
                     @foreach ($viewData["addon"] as $addon)
                     <tr>
                         <td>
-                            <img src="{{asset('/storage/'.$addon->getImage())}}" alt="" style="width: 45px; height: 45px;" class="rounded-circle">
-                            {{ $addon->getName() }}
+                            <div class='d-flex align-items-center'>
+                                <img src="{{asset('/storage/'.$addon->getImage())}}" alt="" style="width: 45px; height: 45px;" class="rounded-circle">
+                                <div class='ms-3'>
+                                    <p class='fw-normal mb-0'>{{ $addon->getName() }}</p>
+                                </div>
+                            </div>
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">{{ $addon->getDescription() }}</p>
+                            <p class="fw-normal mb-0">{{ $addon->getDescription() }}</p>
                         </td>
                         <td>
-                            <p class="fw-normal mb-1">{{ $addon->getPrice() }}</p>
+                            <p class="fw-normal mb-0">{{ $addon->getPrice() }}</p>
                         </td>
                         <td>
                             <div class="row w-50">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <!-- edit -->
                                     <a class="badge badge-edit text-white bg-primary rounded-pill d-inline" href="{{route('dashboard.admin.addon.edit', ['id'=> $addon->getId()])}}"">
                                         edit
                                     </a>
                                 </div>
-
-                                <div class="col-lg-4">
-                                    <!-- delete -->
-                                    <form action="{{ route('dashboard.admin.addon.delete', $addon->getId())}} method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <a type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
-                                            delete
-                                        </a>
-                                    </form>
+                                <div class=" col-lg-6">
+                                        <!-- delete -->
+                                        <form action="{{ route('dashboard.admin.addon.delete', $addon->getId())}} method=" POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
+                                                delete
+                                            </button>
+                                        </form>
                                 </div>
                             </div>
                         </td>

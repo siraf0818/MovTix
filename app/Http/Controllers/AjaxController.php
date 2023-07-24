@@ -23,22 +23,41 @@ class AjaxController extends Controller
         } elseif ($request->url == '/dashboard/orders') {
             $orders = Dashboard::getRecentOrder()->filter(function ($item) use ($title) {
                 if ($item->payment != null) {
-                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->total_price, $title) || false !== stristr($item->payment->transaction_status, $title);
+                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->date, $title) || false !== stristr($item->time, $title) || false !== stristr($item->total_price, $title) || false !== stristr($item->payment->transaction_status, $title);
                 } else {
-                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->total_price, $title);
+                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->date, $title) || false !== stristr($item->time, $title) || false !== stristr($item->total_price, $title);
                 }
             });
 
             return $orders;
+        } elseif ($request->url == '/dashboard/sales') {
+            $sales = Dashboard::getRecentOrder()->filter(function ($item) use ($title) {
+                if ($item->payment != null) {
+                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->date, $title) || false !== stristr($item->time, $title) || false !== stristr($item->total_price, $title) || false !== stristr($item->payment->transaction_status, $title) || false !== stristr($item->payment->payment_type, $title);
+                } else {
+                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->date, $title) || false !== stristr($item->time, $title) || false !== stristr($item->total_price, $title);
+                }
+            });
+
+            return $sales;
         } elseif ($request->url == '/dashboard/member/orders') {
             $orders = Dashboard::getRecentOrder()->where('user_id', '=', auth()->user()->id)->filter(function ($item) use ($title) {
                 if ($item->payment != null) {
-                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->total_price, $title) || false !== stristr($item->payment->transaction_status, $title);
+                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->date, $title) || false !== stristr($item->time, $title) || false !== stristr($item->total_price, $title) || false !== stristr($item->payment->transaction_status, $title);
                 } else {
-                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->total_price, $title);
+                    return false !== stristr($item->user->name, $title) || false !== stristr($item->user->email, $title) || false !== stristr($item->order_id, $title) || false !== stristr($item->movie, $title) || false !== stristr($item->date, $title) || false !== stristr($item->time, $title) || false !== stristr($item->total_price, $title);
                 }
             });
             return $orders;
+        } elseif ($request->url == '/dashboard/member/tiket') {
+            $tikets = Dashboard::getRecentOrder()->where('user_id', '=', auth()->user()->id)->filter(function ($item) use ($title) {
+                if ($item->payment != null) {
+                    return false !== stristr($item->movie, $title) || false !== stristr($item->date, $title) || false !== stristr($item->time, $title) || false !== stristr($item->total_price, $title);
+                } else {
+                    return false !== stristr($item->movie, $title) || false !== stristr($item->date, $title) || false !== stristr($item->time, $title) || false !== stristr($item->total_price, $title);
+                }
+            });
+            return $tikets;
         } elseif ($request->url == '/dashboard/addon') {
             $addon = Addon::all()->filter(function ($item) use ($title) {
                 return false !== stristr($item['name'], $title) || false !== stristr($item['description'], $title) || false !== stristr($item['price'], $title);

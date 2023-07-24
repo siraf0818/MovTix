@@ -24,9 +24,8 @@
                 <thead class="bg-light">
                     <tr>
                         <th>Movie</th>
-                        <th>Addon</th>
+                        <th>Date&Time</th>
                         <th>Price</th>
-                        <th>Seat</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -35,28 +34,20 @@
                     <tr>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="{{ App\Models\Movie::getDetails($t->id_movie)['bannerUrl'] }}" alt="" style="width: 45px; height: 45px;" class="rounded-circle">
                                 <div class="ms-3">
                                     <p class="fw-bold mb-1">{{$t->movie}}</p>
-                                    <p class="text-muted mb-0">{{$t->type}}</p>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <p class="text-muted mb-0">{{$t->addon}}</p>
+                            <p class="text-muted mb-0">{{$t->date}} {{$t->time}}</p>
                         </td>
                         <td>
-                            <p class="text-muted mb-0">{{$t->total_price}}</p>
-                        </td>
-                        <td>
-                            @foreach (App\Models\Seat::where('order_id', '=', $t->order_id)->get() as $seat)
-
-                            <span class="text-muted mb-0">{{ $seat->no_seat }}</span>
-                            @endforeach
+                            <p class="text-muted mb-0">{{number_format($t->total_price, 0, '.', '.');}}</p>
                         </td>
                         <td>
                             <div class="row w-100">
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <a href="/dashboard/member/tiket/{{$t->order_id}}" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
                                         view
                                     </a>

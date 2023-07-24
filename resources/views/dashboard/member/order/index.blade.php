@@ -27,7 +27,6 @@
                         <th>Name</th>
                         <th>Invoice</th>
                         <th>Movie</th>
-                        <th>Addon</th>
                         <th>Price</th>
                         <th>Status</th>
                         <th>Action</th>
@@ -50,10 +49,8 @@
                             <p class="fw-normal mb-1">#{{$order->order_id}}</p>
                         </td>
                         <td>
-                            <p class="text-muted mb-0">{{$order->movie}}</p>
-                        </td>
-                        <td>
-                            <p class="text-muted mb-0">{{$order->addon}}</p>
+                            <p class="fw-normal mb-1">{{$order->movie}}</p>
+                            <p class="text-muted mb-0">{{$order->date}} {{$order->time}}</p>
                         </td>
                         <td>
                             <p class="fw-normal mb-1">{{number_format($order->total_price, 0, '.', '.');}}</p>
@@ -89,12 +86,12 @@
                         </td>
                         <td>
                             <div class="row w-100">
-                                <div class="col-4">
+                                <div class="col-lg-4">
                                     <a href="/dashboard/member/orders/{{$order->order_id}}" class="badge badge-edit text-white bg-primary rounded-pill d-inline">
                                         views
                                     </a>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-lg-4">
 
                                     <a href="#" class="badge btn-bayar badge-edit  text-white bg-secondary rounded-pill d-inline">
                                         pay

@@ -9,10 +9,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    <div class="recentOrders col-lg-8 p-3" style="min-height: calc(100vh - 60px);">
+    <div class="recentOrders col-lg-12 p-3" style="min-height: calc(100vh - 60px);">
         <div class="cardHeader row">
             <div class="d-flex align-items-center col-12 col-lg-8 col-md-8">
-                <img src="/img/logo.png" alt="" style="width: 45px; height: 45px;" class="rounded-circle">
+                <img src="/img/logo.png" alt="" style="width: 45px; height: 45px;" class="">
                 <div class="ms-3">
                     <p class="fw-bold mb-0">MovTix</p>
                     <p class="text-muted mb-0">movtix@gmail.com</p>
@@ -20,19 +20,18 @@
             </div>
             <p class="text-muted mb-0 col mt-2">Polines</p>
         </div>
-        <div class="d-flex row invoice mt-3 justify-content-between purple-gradient color-block z-depth-1">
+        <div class="d-flex row invoice mt-3 mx-1 justify-content-between purple-gradient color-block z-depth-1">
             <div class="col-lg-4 col-12 p-3">
                 <p class="fw-bolder mb-0">Invoice Number</p>
                 <p class="fw-normal mb-0">{{$detail->order_id}}</p>
                 <p class="fw-normal mb-0">Issued Date: <span class="fw-bolder">{{$detail->created_at->format('d M, Y')}}</span></p>
-                <p class="fw-normal mb-0">Due Date: <span class="fw-bolder">{{date('d M, Y', strtotime("+1 day", strtotime($detail->created_at)))}}</span></p>
+                <p class="fw-normal mb-0">Due Date: <span class="fw-bolder">{{$detail->created_at->format('d M, Y')}}</span></p>
             </div>
             <div class="col-lg-4 col-12 p-3">
                 <p class="fw-bolder mb-0">Billed to</p>
                 <p class="fw-normal mb-0">{{$detail->user->name}}</p>
                 <p class="fw-normal mb-0">{{$detail->user->address}}</p>
             </div>
-
         </div>
         <div class="item-detail mt-3">
             <p class="fw-bold mb-0">Item Detail</p>
@@ -41,11 +40,11 @@
                     <thead class="bg-light">
                         <tr>
                             <th>Invoice</th>
-                            <th>Movie</th>
-                            <th>Addon</th>
                             <th>Date Time</th>
-                            <th>Price</th>
+                            <th>Movie</th>
+                            <th>Seats</th>
                             <th>Tickets</th>
+                            <th>Addons</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,30 +53,63 @@
                                 <p class="fw-normal mb-1">#{{$detail->order_id}}</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">{{$detail->movie}}</p>
-                            </td>
-                            <td>
-                                <p class="fw-normal mb-1">{{$detail->addon}}</p>
-                                <p class="fw-normal mb-1">Jumlah: {{$detail->jml_addon}}</p>
-                            </td>
-                            <td>
                                 <p class="fw-normal mb-1">{{$detail->date}}</p>
                                 <p class="text-muted mb-0">{{$detail->time}}</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">RP. {{number_format($price, 0, '.', '.');}}</p>
+                                <p class="fw-normal mb-1">{{$detail->movie}}</p>
                             </td>
                             <td>
-                                <p class="fw-normal mb-1">{{$detail->jml_tiket}} Tickets</p>
+                                <p class="fw-normal mb-1">@foreach (App\Models\Seat::where('order_id', '=', $detail->order_id)->get() as $seat)
+                                    [{{ $seat->no_seat }}]
+                                    @endforeach
+                                </p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">{{$detail->jml_tiket}} Tickets
+                                </p>
+                                <p class="fw-normal mb-1">Total: Rp.{{$detail->tiket_price}}</p>
+                            </td>
+                            <td>
+                                <p class="fw-normal mb-1">{{$detail->addon}}</p>
+                                <p class="fw-normal mb-1">Total: Rp.{{$detail->addon_price}}</p>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div class="total-amount row mt-4">
-            <div class="col-lg-8"></div>
-            <div class="col-lg-4">
+        <div class="total-amount row">
+            <div class="col-lg-8 mt-3">
+                @if($detail->payment != null)
+                <div class="row">
+                    <div class="col-6">
+                        <p class="fw-normal text-muted mb-0">Transaction Time:</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-muted fw-bolder mb-0">{{date('d M, Y', strtotime("+0 day", strtotime($detail->payment->transaction_time)))}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="fw-normal text-muted mb-0">Transaction Status:</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-muted fw-bolder mb-0">{{$detail->payment->transaction_status}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <p class="fw-normal text-muted mb-0">Payment Type:</p>
+                    </div>
+                    <div class="col-6">
+                        <p class="text-muted fw-bolder mb-0">{{$detail->payment->payment_type}}</p>
+                    </div>
+                </div>
+
+                @endif
+            </div>
+            <div class="col-lg-4 mt-3">
                 <div class="row">
                     <div class="col-6">
                         <p class="fw-bolder mb-0">Sub Total</p>
@@ -103,7 +135,6 @@
                         <p class="fw-normal mb-0">RP. {{number_format($detail->total_price, 0, '.', '.');}}</p>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>

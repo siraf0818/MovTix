@@ -132,21 +132,21 @@
                         </td>
                         <td>
                             <div class="row w-10">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <!-- edit -->
                                     <a class="badge badge-edit text-white bg-primary rounded-pill d-inline" href="{{route('dashboard.admin.penayangan.edit', ['id'=> $penayangan->getId()])}}">
                                         edit
                                     </a>
                                 </div>
 
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <!-- delete -->
                                     <form action="{{ route('dashboard.admin.penayangan.delete', $penayangan->getId())}}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <a type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
+                                        <button type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
                                             delete
-                                        </a>
+                                        </button>
                                     </form>
                                 </div>
                             </div>
