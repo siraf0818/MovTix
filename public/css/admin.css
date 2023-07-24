@@ -47,6 +47,7 @@ body {
     border-left: 10px solid var(--dark);
     transition: 0.5s;
     overflow: hidden;
+    overflow-y: auto;
 }
 
 .navigation.active {
@@ -384,13 +385,13 @@ body {
 }
 
 a.badge-delete:hover {
-    background: rgb(77, 26, 0) !important;
+    background: #26004d !important;
 }
 a.badge-edit:hover {
-    background: rgb(77, 26, 0) !important;
+    background: #26004d !important;
 }
 button.badge-save:hover {
-    background: rgb(77, 26, 0) !important;
+    background: #26004d !important;
 }
 .detail-tiket {
     width: 100%;

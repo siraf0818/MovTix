@@ -113,9 +113,9 @@
                                     <form action="/dashboard/orders/{{{$order->order_id}}}" method="POST">
                                         @method('DELETE')
                                         @csrf
-                                        <button type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
+                                        <a type="submit" onclick="return confirm('Are you sure?')" class="badge btn badge-delete text-white bg-danger rounded-pill d-inline">
                                             delete
-                                        </button>
+                                        </a>
                                     </form>
                                 </div>
 

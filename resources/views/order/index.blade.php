@@ -17,7 +17,7 @@
                         <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-film"></i></span>
                     </label>
                     <input type="search" id="movie" class="form-control" hint="off" autocomplete="off" name="movie" placeholder="Cari film..." required />
-                    <div id="dropmov" class="dropdown mt-2 invisible w-100">
+                    <div id="dropmov" class="dropdown dropdownas mt-2 invisible w-100">
                         <ul id="list-movie" class="p-2 w-100 bg-white rounded text-black list-unstyled position-absolute">
                             @foreach ($posts as $p)
                             <li id="{{$p["id"]}}" class='opt-movie'><img src="{{$p["bannerUrl"]}}" alt='' width='30px' class='mr-3'><span class='my-auto'>{{$p["title"]}}</span></li>
@@ -144,7 +144,7 @@
                                 <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span>
                             </label>
                             <input type="search" id="addons" class="form-control" hint="off" autocomplete="off" name="addon[]" placeholder="Cari addon..." />
-                            <div id="dropadn" class="dropdown mt-2 invisible w-100">
+                            <div id="dropadn" class="dropdown dropdownas mt-2 invisible w-100">
                                 <ul id="list-addon" class="p-2 w-100 bg-white rounded text-black list-unstyled position-absolute fixed-top">
                                     @foreach ($viewData["addon"] as $addon)
                                     <li id="{{$addon->getId()}}" class='opt-addon'><img src="{{asset('/storage/'.$addon->getImage())}}" alt='' width='30px' class='mr-3'><span adnp="{{ $addon->getPrice() }}" class='my-auto'>{{$addon->getName()}}</span></li>
@@ -266,7 +266,7 @@
     }
 
     function addonshow(id) {
-        $('.dropdown').addClass('invisible');
+        $('.dropdownas').addClass('invisible');
         var value = $(`#addonbs${id}`).val().toLowerCase();
         $(`#list-addon${id} li`).filter(function() {
             $(`#list-addon${id} li`).toggle($(`#addonbs${id}`).find('span').text().toLowerCase().indexOf(value) > -1)
@@ -376,7 +376,7 @@
 
     $(document).ready(function() {
         $(document).click(function() {
-            $('.dropdown').addClass('invisible');
+            $('.dropdownas').addClass('invisible');
         });
         $(document).on("click", ".opt-movie", function() {
             var seat = $('.show-seat span')
@@ -410,7 +410,7 @@
                     console.log(data);
                 },
             });
-            $('.dropdown').addClass("invisible");
+            $('.dropdownas').addClass("invisible");
             var jml_tiket = $('#jml_tiket');
             jml_tiket.val(0)
             $(".jml-tiket").text(0)
@@ -461,7 +461,7 @@
                     console.log(data);
                 },
             });
-            $('.dropdown').addClass("invisible");
+            $('.dropdownas').addClass("invisible");
             var jml_tiket = $('#jml_tiket');
             jml_tiket.val(0)
             $(".jml-tiket").text(0)
@@ -514,7 +514,7 @@
                     console.log(data);
                 },
             });
-            $('.dropdown').addClass("invisible");
+            $('.dropdownas').addClass("invisible");
             var jml_tiket = $('#jml_tiket');
             jml_tiket.val(0)
             $(".jml-tiket").text(0)
@@ -605,7 +605,7 @@
         })
 
         $("#movie").bind("keypress click", function(event) {
-            $('.dropdown').addClass('invisible');
+            $('.dropdownas').addClass('invisible');
             var value = $(this).val().toLowerCase();
             $('#list-movie li').filter(function() {
                 $(this).toggle($(this).find('span').text().toLowerCase().indexOf(value) > -1)
@@ -615,7 +615,7 @@
         });
 
         $("#addons").bind("keypress click", function() {
-            $('.dropdown').addClass('invisible');
+            $('.dropdownas').addClass('invisible');
             var value = $(this).val().toLowerCase();
             $('#list-addon li').filter(function() {
                 $(this).toggle($(this).find('span').text().toLowerCase().indexOf(value) > -1)
@@ -827,7 +827,7 @@
             valueb++;
             banyak_addon.val(valueb);
             $(".banyak_addon").text(valueb);
-            $('#addonb').append(`<div id="addonbss${valueb}" class="col-lg-10 col-12"><div class="input-group mb-3"><label for="addonbs${valueb}" class="input-group-prepend"><span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span></label><input id="addonbs${valueb}" type="search" onkeypress="addonshow(${valueb})" onclick="addonshow(${valueb})" class="form-control" hint="off" autocomplete="off" name="addon[]" placeholder="Cari addon..." /><div id="dropadn${valueb}" class="dropdown mt-2 invisible w-100">
+            $('#addonb').append(`<div id="addonbss${valueb}" class="col-lg-10 col-12"><div class="input-group mb-3"><label for="addonbs${valueb}" class="input-group-prepend"><span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-basket2"></i></span></label><input id="addonbs${valueb}" type="search" onkeypress="addonshow(${valueb})" onclick="addonshow(${valueb})" class="form-control" hint="off" autocomplete="off" name="addon[]" placeholder="Cari addon..." /><div id="dropadn${valueb}" class="dropdown dropdownas mt-2 invisible w-100">
                                 <ul id="list-addon${valueb}" class="fixed-top p-2 w-100 bg-white rounded text-black list-unstyled position-absolute">
                                     @foreach ($viewData["addon"] as $addon)
                                     <li id="{{$addon->getId()}}" onclick="addonprice(${valueb},${valueb}{{$addon->getId()}})" class='opt-addon${valueb}{{$addon->getId()}}'><img src="{{asset('/storage/'.$addon->getImage())}}" alt='' width='30px' class='mr-3'><span adnp="{{ $addon->getPrice() }}" class='my-auto'>{{$addon->getName()}}</span></li>

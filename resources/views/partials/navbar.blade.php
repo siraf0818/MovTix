@@ -43,16 +43,11 @@
             {{ auth()->user()->name }}
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/dashboard"> <i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a></li>
-            <li>
-              <hr class="dropdown-divider">
-            </li>
-            <li>
-              <form action="/logout" method="post">
-                @csrf
-                <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
-              </form>
-            </li>
+            <a class="dropdown-item" href="/dashboard"> <i class="bi bi-layout-text-sidebar-reverse"></i> My Dashboard</a>
+            <form action="/logout" method="post">
+              @csrf
+              <button type="submit" class="dropdown-item"><i class="bi bi-box-arrow-right"></i> Logout</button>
+            </form>
           </ul>
         </li>
         @else
