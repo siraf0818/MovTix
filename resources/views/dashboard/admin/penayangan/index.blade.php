@@ -88,7 +88,7 @@
 <div class="details row px-4 gap-3 position-relative">
     <div class="recentCustomer col p-3">
         <div class="cardHeader d-flex justify-content-between">
-            <h5>Manage Penayangan</h5>
+            <h5>Manage Theater Showing</h5>
             <div class="search" style="width: 200px; height: 40px; padding-bottom: 8px;">
                 <label for="" style="height: 100%;">
                     <input style="height: 100%" id="searchval" type="text" placeholder="Search..">
