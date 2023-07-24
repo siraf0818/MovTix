@@ -269,9 +269,10 @@
         $('.dropdownas').addClass('invisible');
         var value = $(`#addonbs${id}`).val().toLowerCase();
         $(`#list-addon${id} li`).filter(function() {
-            $(`#list-addon${id} li`).toggle($(`#addonbs${id}`).find('span').text().toLowerCase().indexOf(value) > -1)
+            $(`#list-addon${id} li`).toggle($(`#list-addon${id} li`).find('span').text().toLowerCase().indexOf(value) > -1)
         })
         $(`#dropadn${id}`).removeClass("invisible");
+        console.log(id);
         event.stopPropagation();
     }
 
