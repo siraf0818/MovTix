@@ -5,20 +5,20 @@
         <div class="cardHeader d-flex justify-content-between">
             <h5>Edit Theater Showing</h5>
         </div>
-        <div class="card-body"> 
+        <div class="card-body">
             @if($errors->any())
-            <ul class="alert alert-danger list-unstyled"> 
+            <ul class="alert alert-danger list-unstyled">
                 @foreach($errors->all() as $error)
-                <li>- {{ $error }}</li> 
+                <li>- {{ $error }}</li>
                 @endforeach
-            </ul> 
+            </ul>
             @endif
 
             <form method="POST" action="{{ route('dashboard.admin.penayangan.update', ['id'=> $viewData['penayangan']->getId()]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <input name="id" value="" type="text" class="form-control mb-3" hidden>
-                <input id="id" value="{{ $viewData['penayangan']->getId() }}" type="text" class="form-control mb-3" disabled>
+                <input name="id" id="id" value="{{ $viewData['penayangan']->getId() }}" type="text" class="form-control mb-3" disabled>
                 <input name="id_movie" value="{{ $viewData['penayangan']->getIdMovie() }}" type="text" class="form-control mb-3" hidden>
                 <div class="row">
                     <div class="col">
@@ -26,8 +26,8 @@
                             <label for="theater" class="input-group-prepend">
                                 <span class="input-group-text rounded-0" id="basic-addon1"><i class="bi bi-geo-alt"></i></span>
                             </label>
-                            <select id="theater" value="{{ $viewData['penayangan']->getTheater() }}" name="theater" class="form-select" aria-label="Default select example">
-                                <option>Pilih Theater</option>
+                            <select id="theater" name="theater" class="form-select" aria-label="Default select example">
+                                <option selected value="{{ $viewData['penayangan']->getTheater() }}">{{ $viewData['penayangan']->getTheater() }}</option>
                                 <option value="T1">Theater 1</option>
                                 <option value="T2">Theater 2</option>
                             </select>
