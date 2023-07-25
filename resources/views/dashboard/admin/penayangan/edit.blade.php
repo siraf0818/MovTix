@@ -17,8 +17,8 @@
             <form method="POST" action="{{ route('dashboard.admin.penayangan.update', ['id'=> $viewData['penayangan']->getId()]) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <input name="id" value="" type="text" class="form-control mb-3" hidden>
-                <input name="id" id="id" value="{{ $viewData['penayangan']->getId() }}" type="text" class="form-control mb-3" disabled>
+                <input name="id" value="{{ $viewData['penayangan']->getId() }}" type="text" class="form-control mb-3" hidden>
+                <input id="id" value="{{ $viewData['penayangan']->getId() }}" type="text" class="form-control mb-3" disabled>
                 <input name="id_movie" value="{{ $viewData['penayangan']->getIdMovie() }}" type="text" class="form-control mb-3" hidden>
                 <div class="row">
                     <div class="col">
